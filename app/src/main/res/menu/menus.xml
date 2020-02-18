@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/newproduct"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:title="@string/my_products"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/Profile"
+        android:title="@string/my_profile" />
+
+
+    <item
+        android:id="@+id/helpline"
+        android:title="@string/customer_helpline" />
+    <item
+        android:id="@+id/settings"
+        android:title="@string/appsettings" />
+    <item
+        android:id="@+id/expenses"
+        android:title="@string/clear_expenses" />
+
+
+</menu>

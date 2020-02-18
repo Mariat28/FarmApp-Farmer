@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "994924797191",
+    "firebase_url": "https://glo-sales.firebaseio.com",
+    "project_id": "glo-sales",
+    "storage_bucket": "glo-sales.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994924797191:android:aa19e2f3c1282f795879a2",
+        "android_client_info": {
+          "package_name": "com.example.glosales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994924797191-j9807mepb5tsrmsg8gpsrud0aekv6lrn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.glosales",
+            "certificate_hash": "3623492ebc127a6942c981d7af66af69701c7cd2"
+          }
+        },
+        {
+          "client_id": "994924797191-ivca365iqej93ad13g85s27svcr6273c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANxyGrqZOns-j1zy6qAJVrN-GP9HZQldY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994924797191-ivca365iqej93ad13g85s27svcr6273c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
