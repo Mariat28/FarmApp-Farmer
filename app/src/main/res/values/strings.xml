@@ -40,11 +40,18 @@
     <string name="clear_expenses">Clear Expense list</string>
     <string name="remaining_stock">Remaining Stock</string>
     <string name="please_enter_sale_amount">Please enter sale amount</string>
-    <string name="sendbutton">sendbutton</string>
     <string name="tempicon">icon</string>
     <string name="agromarket">Agro-Market</string>
     <string name="farmfinancials">Farm Financials</string>
     <string name="supporttools">Support Tools</string>
     <string name="inputtracking">Input Tracking</string>
     <string name="made_with_love_by_global_auto_systems">Made with Love By Global Auto Systems</string>
+    <string name="products">Products</string>
+    <string name="farm_tools">Farm Tools</string>
+    <string name="supplies">Supplies</string>
+    <string name="manuals">Manuals</string>
+    <string name="notices">Notices</string>
+    <string name="stories">Stories</string>
+    <string name="todo">TODO</string>
+    <string name="sendbutton">sendbutton</string>
 </resources>

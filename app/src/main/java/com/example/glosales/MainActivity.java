@@ -9,9 +9,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.glosales.AgroMarket.HomeTabbedActivity;
-import com.example.glosales.FarmFinancials.FarmFinancialsMain;
-import com.example.glosales.SupportTools.Supporttools;
+import com.example.glosales.agromarket.ProductsActivity;
+import com.example.glosales.farmfinancials.FarmFinancialsMain;
+import com.example.glosales.supporttools.SupportActivityMain;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -20,8 +20,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView sendbutton;
     String retrievedfarmname;
     TextInputEditText openingstock;
-    MaterialCardView agromarketcard, farmfinancialscard, supporttoolscard, inputtrackingcard;
-
+    boolean card_is_shown = false;
+    TextView supplies, farm_tools, products;
+    MaterialCardView agromarketcard, farmfinancialscard, supporttoolscard, inputtrackingcard, market_card_panel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +31,34 @@ public class MainActivity extends AppCompatActivity {
         farmfinancialscard = findViewById(R.id.farmfinancialscard);
         agromarketcard = findViewById(R.id.agromarket);
         supporttoolscard = findViewById(R.id.supporttoolscard);
+        market_card_panel = findViewById(R.id.market_card_panel);
         inputtrackingcard = findViewById(R.id.inputtrackingcard);
+        supplies = findViewById(R.id.supplies);
+        farm_tools = findViewById(R.id.farm_tools);
+        products = findViewById(R.id.products);
+        final TextView[] textViews = {supplies, products, farm_tools};
+        for (final TextView textView : textViews) {
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    card_is_shown = false;
+                    openMarket(textView.getId());
+                    market_card_panel.setVisibility(View.INVISIBLE);
+                    market_card_panel.animate().translationY(4).alpha(0.9f).setListener(null);
+                }
+            });
+        }
+
         agromarketcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HomeTabbedActivity.class);
-                startActivity(intent);
+                if (!card_is_shown) {
+                    card_is_shown = true;
+                    market_card_panel.setVisibility(View.VISIBLE);
+                    market_card_panel.setAlpha(0.0f);
+                    market_card_panel.animate().translationY(-4).alpha(0.9f).setListener(null);
+
+                }
             }
         });
         farmfinancialscard.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         supporttoolscard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Supporttools.class);
+                Intent intent = new Intent(MainActivity.this, SupportActivityMain.class);
                 startActivity(intent);
 
 
@@ -114,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 //                reference.child(key).child("opening_stock").setValue(openingstocks);
 //                reference.child(key).child("farm_name").setValue(farmnamee);
 //                openingstock.setText("");
-//                Toast.makeText(MainActivity.this, "Opening Stock Added", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SupportActivityMain.this, "Opening Stock Added", Toast.LENGTH_SHORT).show();
 //                Query query = reference.orderByChild("farm_name");
 //                query.addChildEventListener(new ChildEventListener() {
 //                    @Override
@@ -155,10 +178,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    public boolean onCreateOptionsMenu(Menu menu) {
+
+    //    public boolean onCreateOptionsMenu(Menu menu) {
 //        MenuInflater menuInflater = getMenuInflater();
 //        menuInflater.inflate(R.menu.menus, menu);
 //
 //        return true;
 //    }
+    void openMarket(int text_view_id) {
+        switch (text_view_id) {
+            case R.id.supplies:
+                Toast.makeText(this, "Supplies", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.farm_tools:
+                Toast.makeText(this, "Tools", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.products:
+                startActivity(new Intent(this, ProductsActivity.class));
+                break;
+        }
+    }
 }

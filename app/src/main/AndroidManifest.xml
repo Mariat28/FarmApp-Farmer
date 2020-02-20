@@ -10,7 +10,7 @@
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher"
@@ -18,10 +18,8 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".SupportTools.Supporttools"
-            android:theme="@style/AppTheme.ActionBar"
-            tools:ignore="InnerclassSeparator" />
-
+            android:name=".supporttools.SupportActivityMain"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,22 +27,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".AgroMarket.HomeTabbedActivity"
+            android:name=".agromarket.ProductsActivity"
+            android:parentActivityName=".MainActivity"
             tools:ignore="InnerclassSeparator" />
-
         <activity
-            android:name=".AgroMarket.OrderDetails"
+            android:name=".agromarket.OrderDetails"
             tools:ignore="InnerclassSeparator" />
-
         <activity
-            android:name=".AgroMarket.Productdetails"
+            android:name=".agromarket.Productdetails"
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".LoginTabbedActivity" />
-
         <activity
-            android:name=".FarmFinancials.FarmFinancialsMain"
+            android:name=".farmfinancials.FarmFinancialsMain"
+            android:parentActivityName=".MainActivity"
             tools:ignore="InnerclassSeparator" />
     </application>
 

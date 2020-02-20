@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="AgroMarket.Fragments.Stock_Details">
+    tools:context=".farmfinancials.StockDetails">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profile_card"
@@ -29,7 +30,8 @@
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_farmer_profile" />
+                    android:contentDescription="@string/todo"
+                    app:srcCompat="@drawable/ic_farmer_profile" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -66,7 +68,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/profile_card"
         android:layout_margin="5dp"
-        android:elevation="5dp">
+        app:cardElevation="5dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -128,7 +130,7 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/sendbutton"
-                    android:src="@drawable/ic_send" />
+                    app:srcCompat="@drawable/ic_send" />
 
             </LinearLayout>
 
@@ -156,7 +158,6 @@
                 android:layout_below="@id/total_stock_layout"
                 android:layout_marginStart="180dp"
                 android:layout_marginTop="10dp"
-                android:text="0"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -184,8 +185,8 @@
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:contentDescription="sendbutton"
-                    android:src="@drawable/ic_send" />
+                    android:contentDescription="@string/sendbutton"
+                    app:srcCompat="@drawable/ic_send" />
 
             </LinearLayout>
 
@@ -209,7 +210,6 @@
                 android:layout_below="@+id/sales"
                 android:layout_marginStart="180dp"
                 android:layout_marginTop="10dp"
-                android:text="0"
                 android:textSize="18sp" />
 
             <TextView
@@ -230,7 +230,6 @@
                 android:layout_below="@+id/remaining_stock"
                 android:layout_marginStart="180dp"
                 android:layout_marginTop="10dp"
-                android:text="0"
                 android:textSize="18sp" />
 
 
@@ -241,7 +240,7 @@
                 android:layout_above="@+id/floatingActionButton"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="5dp"
-                android:src="@drawable/ic_delete_forever_black_24dp" />
+                app:srcCompat="@drawable/ic_delete_forever_black_24dp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/floatingActionButton"
@@ -250,7 +249,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="5dp"
-                android:src="@drawable/ic_add_black_24dp" />
+                app:srcCompat="@drawable/ic_add_black_24dp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

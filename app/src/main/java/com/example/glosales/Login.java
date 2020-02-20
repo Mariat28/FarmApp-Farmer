@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.glosales.AgroMarket.HomeTabbedActivity;
+import com.example.glosales.agromarket.ProductsActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -23,12 +23,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.Objects;
+
 public class Login extends Fragment {
-    TextInputEditText password, name;
+    private TextInputEditText password;
+    private TextInputEditText name;
     Button Login;
-    Context context;
-    Button logIn;
-    ProgressBar progressBar;
+    private Context context;
+    private Button logIn;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,8 +50,8 @@ public class Login extends Fragment {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/farmercredentials");
-                final String checkedpassword = password.getText().toString();
-                final String checkedname = name.getText().toString();
+                final String checkedpassword = Objects.requireNonNull(password.getText()).toString();
+                final String checkedname = Objects.requireNonNull(name.getText()).toString();
                 Query query = reference.orderByChild("Farm name").equalTo(checkedname);
                 query.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -60,7 +63,7 @@ public class Login extends Fragment {
 
 
                         if ((checkedpassword.equals(retrievedpassword))) {
-                            Intent intent = new Intent(getActivity(), HomeTabbedActivity.class);
+                            Intent intent = new Intent(getActivity(), ProductsActivity.class);
                             intent.putExtra("farmname", retrievedname);
                             startActivity(intent);
 
