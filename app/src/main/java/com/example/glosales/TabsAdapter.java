@@ -4,8 +4,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.glosales.Fragments.CreateAccount;
-import com.example.glosales.Fragments.Login;
 
 class TabsAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
