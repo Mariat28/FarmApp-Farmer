@@ -1,15 +1,16 @@
 package com.example.glosales;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 
 class TabsAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+    private int mNumOfTabs;
 
-    public TabsAdapter(FragmentManager fm, int NoofTabs) {
-        super(fm);
+    TabsAdapter(FragmentManager fm, int NoofTabs) {
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.mNumOfTabs = NoofTabs;
     }
 
@@ -18,18 +19,13 @@ class TabsAdapter extends FragmentStatePagerAdapter {
         return mNumOfTabs;
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                Login login = new Login();
-                return login;
-            case 1:
-                CreateAccount createaccount = new CreateAccount();
-                return createaccount;
-
-            default:
-                return null;
+        if (position == 0) {
+            return new Login();
+        } else {
+            return new CreateAccount();
         }
     }
 }
