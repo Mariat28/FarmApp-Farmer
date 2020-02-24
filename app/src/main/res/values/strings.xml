@@ -54,4 +54,9 @@
     <string name="stories">Stories</string>
     <string name="todo">TODO</string>
     <string name="sendbutton">sendbutton</string>
+    <string name="please_enter_the_input_name">Please enter the input Name</string>
+    <string name="please_enter_the_input_amount">Please Enter the Input amount</string>
+    <string name="sort_by">Sort By</string>
+    <string name="date">Date</string>
+    <string name="alphabetical_order">Alphabetical Order</string>
 </resources>

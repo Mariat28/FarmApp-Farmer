@@ -20,6 +20,7 @@
         <activity
             android:name=".supporttools.SupportActivityMain"
             android:parentActivityName=".MainActivity" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,9 @@
 package com.example.glosales.farmfinancials;
 
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,12 +20,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.glosales.R;
+import com.example.glosales.farmfinancials.adapters.ExpenseAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class InputsFragment extends Fragment {
-    FloatingActionButton newinputfab;
+    private FloatingActionButton newinputfab;
     private ArrayList<ExpenseClass> expenseclass;
 
     public InputsFragment() {
@@ -35,9 +39,44 @@ public class InputsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_inputs, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.inputsrecycler);
+        newinputfab = view.findViewById(R.id.inputfab);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
+        ExpenseAdapter adapter = new ExpenseAdapter(getActivity(), expenseclass);
+        for (int i = 0; i < 10; i++) {
+            ExpenseClass expenseClass = new ExpenseClass("Ferilizers", "200000");
+            expenseclass.add(expenseClass);
+            adapter.notifyDataSetChanged();
+
+        }
+        recyclerView.setAdapter(adapter);
+        newinputfab.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("InflateParams")
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                LayoutInflater inflater = getLayoutInflater();
+                builder.setView(inflater.inflate(R.layout.inputs_alert, null));
+                builder.setTitle("Add Amount details");
+                builder.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+                builder.create();
+                builder.show();
+            }
+
+        });
 
         return view;
     }
