@@ -18,9 +18,12 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".supporttools.SupportActivityMain"
+            android:name=".agromarket.SuppliesActivity"
             android:parentActivityName=".MainActivity" />
 
+        <activity
+            android:name=".supporttools.SupportActivityMain"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

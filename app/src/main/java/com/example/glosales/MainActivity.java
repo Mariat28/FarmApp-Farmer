@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.glosales.agromarket.ProductsActivity;
+import com.example.glosales.agromarket.SuppliesActivity;
 import com.example.glosales.farmfinancials.FarmFinancialsMain;
 import com.example.glosales.supporttools.SupportActivityMain;
 import com.google.android.material.card.MaterialCardView;
@@ -188,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
     void openMarket(int text_view_id) {
         switch (text_view_id) {
             case R.id.supplies:
-                Toast.makeText(this, "Supplies", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, SuppliesActivity.class));
                 break;
             case R.id.farm_tools:
                 Toast.makeText(this, "Tools", Toast.LENGTH_SHORT).show();

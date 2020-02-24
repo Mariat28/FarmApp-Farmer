@@ -30,8 +30,8 @@ public class ManualsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_manuals, container, false);
         ListView listView = view.findViewById(R.id.manualslist);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), R.layout.manuals_list_row_item, listViewObjectsArrayList);
-        for (int x = 0; x < 10; x++) {
-            listViewObjectsArrayList.add("How to elimenate banana weevils - 20th Jan 2020");
+        for (int x = 0; x < 20; x++) {
+            listViewObjectsArrayList.add("How to eliminate banana weevils - 20th Jan 2020");
             adapter.notifyDataSetChanged();
         }
         listView.setAdapter(adapter);

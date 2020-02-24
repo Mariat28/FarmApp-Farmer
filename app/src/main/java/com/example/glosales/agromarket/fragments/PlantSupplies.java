@@ -15,39 +15,39 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.glosales.R;
-import com.example.glosales.agromarket.adapterobjects.MarketObject;
-import com.example.glosales.agromarket.adapters.MarketAdapter;
+import com.example.glosales.agromarket.adapterobjects.SupplierObjects;
+import com.example.glosales.agromarket.adapters.SupplierAdapter;
 
 import java.util.ArrayList;
 
-public class Market extends Fragment {
-    private ArrayList<MarketObject> MarketObjects;
 
-    public Market() {
-        MarketObjects = new ArrayList<>();
-    }
+public class PlantSupplies extends Fragment {
+    private ArrayList<SupplierObjects> supplierObjectsArrayList = new ArrayList<>();
+
+   /* public PlantSupplies(ArrayList<SupplierObjects> supplierObjectsArrayList) {
+        this.supplierObjectsArrayList = supplierObjectsArrayList;
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.marketfragment, container, false);
-        RecyclerView recyclerView;
-        recyclerView = view.findViewById(R.id.marketrecyclerview);
+        View view = inflater.inflate(R.layout.fragment_plant_supplies, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.suppliesrecycler);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        MarketAdapter adapter = new MarketAdapter(MarketObjects, getActivity());
-
-        for (int i = 0; i < 6; i++) {
-            MarketObject marketclass = new MarketObject("Kitara Farm", "Ntungamo,Plot23", "+256 708978909", R.drawable.ic_launcher);
-            MarketObjects.add(marketclass);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        SupplierAdapter adapter = new SupplierAdapter(supplierObjectsArrayList, getContext());
+        for (int i = 0; i < 10; i++) {
+            SupplierObjects supplierObjects = new SupplierObjects("AMAI's Agro Store", "0700978976", "Bananuka Drive",
+                    R.drawable.ic_shopping_cart_black_24dp);
+            supplierObjectsArrayList.add(supplierObjects);
             adapter.notifyDataSetChanged();
+
         }
-
         recyclerView.setAdapter(adapter);
-
         return view;
     }
+
     /*Enable options menu in this fragment*/
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,4 +67,6 @@ public class Market extends Fragment {
         menu.findItem(R.id.expenses).setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+
 }

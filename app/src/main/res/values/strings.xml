@@ -57,6 +57,13 @@
     <string name="please_enter_the_input_name">Please enter the input Name</string>
     <string name="please_enter_the_input_amount">Please Enter the Input amount</string>
     <string name="sort_by">Sort By</string>
-    <string name="date">Date</string>
-    <string name="alphabetical_order">Alphabetical Order</string>
+    <string name="date"> Sort By Date</string>
+    <string name="alphabetical_order"> Sort By Alphabetical Order</string>
+    <string name="readmore_link"> Read More<a href="globalautosystems.co.ug" /></string>
+    <string name="description">The Government of Uganda would like to inform the general public that there has been an outbreak of corona in
+        the country. 3 cases have been reported in Mbale, 5 cases in Kabale and 20 cases in Isingiro. In this regard, every one is advised to keep minimum
+        contact with all collegeaus or any suspected corona Virus victims Read More....</string>
+    <string name="corona_virus_outbreak">CORONA VIRUS OUTBREAK</string>
+    <string name="_20th_jan_2020">20th jan 2020</string>
+    <string name="read_more">Read More</string>
 </resources>

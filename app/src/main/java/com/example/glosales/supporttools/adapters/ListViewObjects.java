@@ -1,4 +1,4 @@
-package com.example.glosales.supporttools;
+package com.example.glosales.supporttools.adapters;
 
 public class ListViewObjects {
 
