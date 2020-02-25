@@ -5,6 +5,7 @@ public class NoticesObjects {
     private String noticedesc;
     private String date;
 
+
     public NoticesObjects(String noticetitle, String noticedesc, String date) {
         this.noticetitle = noticetitle;
         this.noticedesc = noticedesc;

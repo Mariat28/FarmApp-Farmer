@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.glosales.agromarket.FarmTools;
 import com.example.glosales.agromarket.ProductsActivity;
 import com.example.glosales.agromarket.SuppliesActivity;
 import com.example.glosales.farmfinancials.FarmFinancialsMain;
@@ -192,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SuppliesActivity.class));
                 break;
             case R.id.farm_tools:
-                Toast.makeText(this, "Tools", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, FarmTools.class));
                 break;
             case R.id.products:
                 startActivity(new Intent(this, ProductsActivity.class));

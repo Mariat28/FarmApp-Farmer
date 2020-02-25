@@ -1,8 +1,6 @@
 package com.example.glosales.supporttools;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -69,12 +67,11 @@ public class SupportActivityMain extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.commit();
-
     }
-
+/*
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.supportmenu, menu);
         return true;
-    }
+    }*/
 }

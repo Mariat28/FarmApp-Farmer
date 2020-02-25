@@ -18,9 +18,13 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".agromarket.FarmTools"
+            android:label="Tools"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
             android:name=".agromarket.SuppliesActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".supporttools.SupportActivityMain"
             android:parentActivityName=".MainActivity" />

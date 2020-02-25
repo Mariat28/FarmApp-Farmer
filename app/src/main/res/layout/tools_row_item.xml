@@ -2,10 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ordercard"
+    android:id="@+id/toolscard"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_margin="5dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,6 +14,7 @@
         android:weightSum="10">
 
         <ImageView
+            android:id="@+id/dealerimage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -27,7 +29,7 @@
             android:weightSum="12">
 
             <TextView
-                android:id="@+id/clientname"
+                android:id="@+id/dealername"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
@@ -36,7 +38,7 @@
                 tools:ignore="NestedWeights" />
 
             <TextView
-                android:id="@+id/clientcontact"
+                android:id="@+id/dealercontact"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
@@ -44,7 +46,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/orderdetails"
+                android:id="@+id/dealerdetails"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
@@ -56,11 +58,11 @@
         <ImageView
             android:id="@+id/productimage"
             android:layout_width="0dp"
-            android:contentDescription="@string/stock_icon"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"
-            tools:ignore="PrivateResource" />
+            android:contentDescription="@string/stock_icon"
+            app:srcCompat="@drawable/ic_phone_black_24dp" />
 
 
     </LinearLayout>
