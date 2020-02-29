@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".farmfinancials.StockDetails">
+    tools:context=".farmfinancials.IncomeFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profile_card"
@@ -87,7 +87,7 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/stock_icon"
-                    android:src="@drawable/ic_monetization_on_black_24dp" />
+                    app:srcCompat="@drawable/ic_monetization_on_black_24dp" />
 
                 <TextView
 

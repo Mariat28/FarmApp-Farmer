@@ -34,9 +34,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.name.setText(supplierObjectsArrayList.get(position).getSuppliername());
-        holder.location.setText(supplierObjectsArrayList.get(position).getSupplierlocation());
-        holder.contact.setText(supplierObjectsArrayList.get(position).getSuppliercontact());
+        holder.name.setText(supplierObjectsArrayList.get(position).getProductname());
         holder.photo.setImageResource(supplierObjectsArrayList.get(position).getPhoto());
 
     }
@@ -47,15 +45,13 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, location, contact;
+        TextView name;
         ImageView photo;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.suppliername);
-            location = itemView.findViewById(R.id.supplierlocation);
-            contact = itemView.findViewById(R.id.suppliercontact);
-            photo = itemView.findViewById(R.id.farmlogo);
+            name = itemView.findViewById(R.id.productname);
+            photo = itemView.findViewById(R.id.productphoto);
         }
     }
 }

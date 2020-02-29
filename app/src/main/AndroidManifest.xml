@@ -29,11 +29,7 @@
             android:name=".supporttools.SupportActivityMain"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".agromarket.ProductsActivity"
@@ -45,7 +41,13 @@
         <activity
             android:name=".agromarket.Productdetails"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".LoginTabbedActivity" />
+        <activity android:name=".LoginTabbedActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".farmfinancials.FarmFinancialsMain"
             android:parentActivityName=".MainActivity"

@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.glosales.agromarket.ProductsActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -125,7 +124,7 @@ public class CreateAccount extends Fragment {
                     dairy.setChecked(false);
                     crophusbandry.setChecked(false);
                     Toast.makeText(getActivity(), "Successfully created your farm account", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getActivity(), ProductsActivity.class);
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("farmname", farmname);
                     startActivity(intent);
                 }

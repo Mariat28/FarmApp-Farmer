@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.glosales.R;
@@ -35,11 +35,10 @@ public class PlantSupplies extends Fragment {
         View view = inflater.inflate(R.layout.fragment_plant_supplies, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.suppliesrecycler);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         SupplierAdapter adapter = new SupplierAdapter(supplierObjectsArrayList, getContext());
         for (int i = 0; i < 10; i++) {
-            SupplierObjects supplierObjects = new SupplierObjects("AMAI's Agro Store", "0700978976", "Bananuka Drive",
-                    R.drawable.ic_shopping_cart_black_24dp);
+            SupplierObjects supplierObjects = new SupplierObjects("Nortraz", R.drawable.ic_account_circle_black_24dp);
             supplierObjectsArrayList.add(supplierObjects);
             adapter.notifyDataSetChanged();
 

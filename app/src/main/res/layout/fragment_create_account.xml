@@ -23,10 +23,7 @@
                 android:id="@+id/farmername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTintMode="src_atop">
-
+                android:layout_margin="10dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/farmnamee"
                     android:layout_width="match_parent"
@@ -42,8 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/farmername"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp">
+                android:layout_margin="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/farm_name"
@@ -59,9 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/farmname"
-                android:layout_marginStart="10dp"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTintMode="src_atop">
+                android:layout_margin="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phonenumber"
@@ -77,9 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/phone"
-                android:layout_marginStart="10dp"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTintMode="src_atop">
+                android:layout_margin="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/NIN"
@@ -96,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/nationalID"
-                android:layout_marginStart="10dp"
+                android:layout_margin="10dp"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTintMode="src_atop">
 
@@ -113,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/password_layout"
-                android:layout_marginStart="10dp"
+                android:layout_margin="10dp"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTintMode="src_atop">
 
@@ -170,12 +162,12 @@
 
             <Button
                 android:id="@+id/signinbutton"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/productcategories"
-                android:layout_marginStart="120dp"
                 android:background="@drawable/login_button"
                 android:text="@string/sign_in"
+                android:layout_centerInParent="true"
                 android:textColor="@color/white" />
 
             <ProgressBar

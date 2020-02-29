@@ -28,7 +28,7 @@ import com.google.firebase.database.Query;
 
 import java.util.Objects;
 
-public class StockDetails extends Fragment {
+public class IncomeFragment extends Fragment {
     private TextView farmname;
     private TextView total_stock;
     private TextInputEditText openingstock;

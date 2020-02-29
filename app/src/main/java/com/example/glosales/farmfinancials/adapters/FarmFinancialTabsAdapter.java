@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.glosales.farmfinancials.Expenses;
+import com.example.glosales.farmfinancials.IncomeFragment;
 import com.example.glosales.farmfinancials.InputsFragment;
-import com.example.glosales.farmfinancials.StockDetails;
 
 public class FarmFinancialTabsAdapter extends FragmentStatePagerAdapter {
     private int mNooftabs;
@@ -21,7 +21,7 @@ public class FarmFinancialTabsAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new StockDetails();
+            return new IncomeFragment();
         } else if (position == 1) {
             return new InputsFragment();
         } else {
