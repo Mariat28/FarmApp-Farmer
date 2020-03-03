@@ -235,7 +235,6 @@
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
-                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/floatingActionButton"
                 android:layout_alignParentEnd="true"

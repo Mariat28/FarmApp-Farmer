@@ -4,15 +4,28 @@ package com.example.glosales;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.annotations.Nullable;
+
+import java.util.Objects;
+
+import static android.content.ContentValues.TAG;
 
 public class Login extends Fragment {
     private TextInputEditText password;
@@ -37,17 +50,19 @@ public class Login extends Fragment {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                /*intent.putExtra("farmname", retrievedname);*/
-                startActivity(intent);
-               /* progressBar.setVisibility(View.VISIBLE);
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/farmercredentials");
+//                Intent intent = new Intent(getActivity(), MainActivity.class);
+//                /*intent.putExtra("farmname", retrievedname);*/
+//                startActivity(intent);
+
+                progressBar.setVisibility(View.VISIBLE);
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/farmers");
                 final String checkedpassword = Objects.requireNonNull(password.getText()).toString();
                 final String checkedname = Objects.requireNonNull(name.getText()).toString();
-                Query query = reference.orderByChild("Farm name").equalTo(checkedname);
+                Query query = reference.orderByChild("name").equalTo(checkedname);
                 query.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        Log.i(TAG, "onChildAdded: " + dataSnapshot.getValue());
                         String retrievedname = dataSnapshot.child("Farm name").getValue(String.class);
                         String retrievedpassword = dataSnapshot.child("Password").getValue(String.class);
 
@@ -86,7 +101,7 @@ public class Login extends Fragment {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });*/
+                });
 
             }
         });

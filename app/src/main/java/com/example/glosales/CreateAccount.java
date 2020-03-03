@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -24,12 +25,13 @@ public class CreateAccount extends Fragment {
     Context context;
     private TextInputEditText password, name, farmername, confirmpassword, NIN, phone;
     private RadioButton crophusbandry, mixed, dairy;
+    private RadioGroup farm_category;
     private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_create_account, container, false);
+        final View view = inflater.inflate(R.layout.fragment_create_account, container, false);
         password = view.findViewById(R.id.password);
         name = view.findViewById(R.id.farm_name);
         farmername = view.findViewById(R.id.farmnamee);
@@ -41,6 +43,7 @@ public class CreateAccount extends Fragment {
         crophusbandry = view.findViewById(R.id.crops);
         mixed = view.findViewById(R.id.mixed);
         dairy = view.findViewById(R.id.dairy);
+        farm_category = view.findViewById(R.id.productcategories);
         Button signIn = view.findViewById(R.id.signinbutton);
         progressBar.setVisibility(View.INVISIBLE);
 
@@ -51,7 +54,7 @@ public class CreateAccount extends Fragment {
                 progressBar.setVisibility(View.VISIBLE);
                 String savedpassword = Objects.requireNonNull(password.getText()).toString();
                 String farmname = Objects.requireNonNull(name.getText()).toString();
-                String glofarmer = Objects.requireNonNull(farmername.getText()).toString();
+                String farmerName = Objects.requireNonNull(farmername.getText()).toString();
                 String confirmedpassword = Objects.requireNonNull(confirmpassword.getText()).toString();
                 String nationID = Objects.requireNonNull(NIN.getText()).toString();
                 String farmercontact = Objects.requireNonNull(phone.getText()).toString();
@@ -59,7 +62,7 @@ public class CreateAccount extends Fragment {
                 String mixedfarming = mixed.getText().toString();
                 String dairyfarming = dairy.getText().toString();
 
-                if (glofarmer.length() == 0) {
+                if (farmerName.length() == 0) {
                     farmername.requestFocus();
                     farmername.setError("Please enter your name");
                 } else if (farmname.length() == 0) {
@@ -84,28 +87,23 @@ public class CreateAccount extends Fragment {
                 } else if (!crophusbandry.isChecked() && !dairy.isChecked() && !mixed.isChecked()) {
                     Toast.makeText(getActivity(), "Please select a farm category", Toast.LENGTH_LONG).show();
                 } else {
+                    int checked_id = farm_category.getCheckedRadioButtonId();
+                    String category = (String) ((RadioButton) view.findViewById(checked_id)).getText();
+                    DatabaseReference farmers = FirebaseDatabase.getInstance().getReference("/farmers");
+                    DatabaseReference farms = FirebaseDatabase.getInstance().getReference("/farms");
+                    DatabaseReference farmer_child = farmers.push();
+                    DatabaseReference farm_child = farms.push();
+                    String farmer_key = farmer_child.getKey();
+                    String farm_key = farm_child.getKey();
 
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/farmercredentials");
-                    DatabaseReference child = reference.push();
-                    String key = child.getKey();
-                    assert key != null;
-                    reference.child(key).child("Farmer name").setValue(glofarmer);
-                    reference.child(key).child("Farm name").setValue(farmname);
-                    reference.child(key).child("NIN").setValue(nationID);
-                    reference.child(key).child("Farmer contact").setValue(farmercontact);
-                    reference.child(key).child("Password").setValue(savedpassword);
-
-                    if (crophusbandry.isChecked()) {
-
-                        reference.child(key).child("Farmer Category").setValue(savedcrop);
-
-                    } else if (mixed.isChecked()) {
-                        reference.child(key).child("Farmer Category").setValue(mixedfarming);
-
-                    } else if (dairy.isChecked()) {
-                        reference.child(key).child("Farmer Category").setValue(dairyfarming);
-
-                    }
+                    Farmer farmer = new Farmer(farmerName, farmercontact, nationID, savedpassword, farm_key);
+                    assert farmer_key != null;
+                    farmers.child(farmer_key).setValue(farmer);
+                    // TODO Add text field for farm location
+                    // todo Add regular expressions for the text fields
+                    Farm farm = new Farm(farmname, "", category);
+                    assert farm_key != null;
+                    farms.child(farm_key).setValue(farm);
 
                     name.setText("");
                     password.setText("");
@@ -134,7 +132,65 @@ public class CreateAccount extends Fragment {
         return view;
     }
 
+    static class Farmer {
+        String name;
+        String phone;
+        String NIN;
+        String password;
+        String farmkey;
 
+        Farmer(String name, String phone, String NIN, String password, String farmkey) {
+            this.name = name;
+            this.phone = phone;
+            this.NIN = NIN;
+            this.password = password;
+            this.farmkey = farmkey;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public String getNIN() {
+            return NIN;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public String getFarmkey() {
+            return farmkey;
+        }
+    }
+
+    static class Farm {
+        String name;
+        String location;
+        String product;
+
+        Farm(String name, String location, String product) {
+            this.name = name;
+            this.location = location;
+            this.product = product;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public String getProduct() {
+            return product;
+        }
+    }
 }
 
 

@@ -35,8 +35,7 @@ public class IncomeFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_stock__details, container, false);
         Intent intent = Objects.requireNonNull(getActivity()).getIntent();
@@ -50,7 +49,6 @@ public class IncomeFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 String newname = dataSnapshot.child("Farm name").getValue(String.class);
-                //Toast.makeText(getApplicationContext(),""+dataSnapshot.child("Farm name").getValue(String.class),Toast.LENGTH_LONG).show();
                 farmname.setText(newname);
             }
 
