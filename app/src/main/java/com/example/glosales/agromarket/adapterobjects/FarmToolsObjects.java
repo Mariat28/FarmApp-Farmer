@@ -1,36 +1,27 @@
 package com.example.glosales.agromarket.adapterobjects;
 
 public class FarmToolsObjects {
-    private String dealername;
-    private String dealercontact;
-    private String dealerdetails;
-    private Integer dealercall, dealerphoto;
+    private String name;
+    private String available;
+    private String price;
 
-    public FarmToolsObjects(String dealername, String dealercontact, String dealerdetails, Integer dealercall, int dealerphoto) {
-        this.dealername = dealername;
-        this.dealercontact = dealercontact;
-        this.dealerdetails = dealerdetails;
-        this.dealercall = dealercall;
-        this.dealerphoto = dealerphoto;
+    public FarmToolsObjects(String price, String name, String available) {
+        this.price = price;
+        this.name = name;
+        this.available = available;
     }
 
-    public String getDealername() {
-        return dealername;
+    public String getPrice() {
+        return price;
     }
 
-    public String getDealercontact() {
-        return dealercontact;
+    public String getName() {
+        return name;
     }
 
-    public String getDealerdetails() {
-        return dealerdetails;
+    public String getAvailable() {
+        return available;
     }
 
-    public Integer getDealerphoto() {
-        return dealerphoto;
-    }
 
-    public Integer getDealercall() {
-        return dealercall;
-    }
 }

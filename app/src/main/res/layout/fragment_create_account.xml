@@ -34,6 +34,20 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phonenumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_your_phone_number"
+                    android:inputType="phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/farmname"
@@ -49,21 +63,21 @@
                     android:inputType="textPersonName"
                     android:textAllCaps="true" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phone"
+                android:id="@+id/farmlocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phonenumber"
+                    android:id="@+id/famlocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/enter_your_phone_number"
-                    android:inputType="phone" />
+                    android:hint="@string/enter_your_farm_location"
+                    android:inputType="textPersonName" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nationalID"

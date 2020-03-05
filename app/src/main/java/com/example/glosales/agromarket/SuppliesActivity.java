@@ -25,7 +25,6 @@ public class SuppliesActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.suppliestab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Plant Supplies"));
         tabLayout.addTab(tabLayout.newTab().setText("Animal Supplies"));
-        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final ViewPager viewPager = findViewById(R.id.suppliesview_pager);
         SuppliesTabsAdapter tabsAdapter = new SuppliesTabsAdapter(getSupportFragmentManager(), tabLayout.getTabCount());

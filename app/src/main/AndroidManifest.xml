@@ -17,30 +17,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".agromarket.ToolDetails" />
         <activity
             android:name=".agromarket.FarmTools"
-            android:label="Tools"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.ActionBar" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".agromarket.SuppliesActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".supporttools.SupportActivityMain"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".agromarket.ProductsActivity"
-            android:parentActivityName=".MainActivity"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name=".agromarket.OrderDetails"
-            tools:ignore="InnerclassSeparator" />
-        <activity
-            android:name=".agromarket.Productdetails"
-            tools:ignore="InnerclassSeparator" />
+            android:parentActivityName=".MainActivity" />
+
+        <activity android:name=".agromarket.OrderDetails" />
+
+        <activity android:name=".agromarket.Productdetails" />
+
         <activity android:name=".LoginTabbedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,10 +43,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".farmfinancials.FarmFinancialsMain"
-            android:parentActivityName=".MainActivity"
-            tools:ignore="InnerclassSeparator" />
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

@@ -23,7 +23,7 @@ import java.util.Objects;
 public class CreateAccount extends Fragment {
 
     Context context;
-    private TextInputEditText password, name, farmername, confirmpassword, NIN, phone;
+    private TextInputEditText password, name, farmername, confirmpassword, NIN, phone, location;
     private RadioButton crophusbandry, mixed, dairy;
     private RadioGroup farm_category;
     private ProgressBar progressBar;
@@ -35,6 +35,7 @@ public class CreateAccount extends Fragment {
         password = view.findViewById(R.id.password);
         name = view.findViewById(R.id.farm_name);
         farmername = view.findViewById(R.id.farmnamee);
+        location = view.findViewById(R.id.famlocation);
         confirmpassword = view.findViewById(R.id.passwordconfirm);
         NIN = view.findViewById(R.id.NIN);
         phone = view.findViewById(R.id.phonenumber);
@@ -53,14 +54,13 @@ public class CreateAccount extends Fragment {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 String savedpassword = Objects.requireNonNull(password.getText()).toString();
+                String farmlocation = Objects.requireNonNull(location.getText()).toString();
                 String farmname = Objects.requireNonNull(name.getText()).toString();
                 String farmerName = Objects.requireNonNull(farmername.getText()).toString();
                 String confirmedpassword = Objects.requireNonNull(confirmpassword.getText()).toString();
                 String nationID = Objects.requireNonNull(NIN.getText()).toString();
                 String farmercontact = Objects.requireNonNull(phone.getText()).toString();
-                String savedcrop = crophusbandry.getText().toString();
-                String mixedfarming = mixed.getText().toString();
-                String dairyfarming = dairy.getText().toString();
+
 
                 if (farmerName.length() == 0) {
                     farmername.requestFocus();
@@ -81,6 +81,10 @@ public class CreateAccount extends Fragment {
                     confirmpassword.requestFocus();
                     confirmpassword.setError("Please confirm password");
 
+                } else if (farmlocation.length() == 0) {
+                    location.requestFocus();
+                    location.setError("Please enter Farm Location");
+
                 } else if (!confirmedpassword.equals(savedpassword)) {
                     confirmpassword.requestFocus();
                     confirmpassword.setError("Passwords do not match!!");
@@ -99,18 +103,17 @@ public class CreateAccount extends Fragment {
                     Farmer farmer = new Farmer(farmerName, farmercontact, nationID, savedpassword, farm_key);
                     assert farmer_key != null;
                     farmers.child(farmer_key).setValue(farmer);
-                    // TODO Add text field for farm location
                     // todo Add regular expressions for the text fields
-                    Farm farm = new Farm(farmname, "", category);
+                    Farm farm = new Farm(farmname, farmlocation, category);
                     assert farm_key != null;
                     farms.child(farm_key).setValue(farm);
-
                     name.setText("");
                     password.setText("");
                     farmername.setText("");
                     confirmpassword.setText("");
                     NIN.setText("");
                     phone.setText("");
+                    location.setText("");
 
                     farmername.setEnabled(true);
                     name.setEnabled(true);
@@ -136,6 +139,7 @@ public class CreateAccount extends Fragment {
         String name;
         String phone;
         String NIN;
+
         String password;
         String farmkey;
 

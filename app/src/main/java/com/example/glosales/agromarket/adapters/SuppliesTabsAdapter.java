@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.glosales.agromarket.fragments.AnimalSupplies;
-import com.example.glosales.agromarket.fragments.Market;
 import com.example.glosales.agromarket.fragments.PlantSupplies;
 
 public class SuppliesTabsAdapter extends FragmentStatePagerAdapter {
@@ -27,9 +26,6 @@ public class SuppliesTabsAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         if (position == 1) {
             return new AnimalSupplies();
-
-        } else if (position == 2) {
-            return new Market();
 
         } else {
             return new PlantSupplies();

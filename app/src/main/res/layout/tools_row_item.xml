@@ -29,7 +29,7 @@
             android:weightSum="12">
 
             <TextView
-                android:id="@+id/dealername"
+                android:id="@+id/toolname"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
@@ -38,7 +38,7 @@
                 tools:ignore="NestedWeights" />
 
             <TextView
-                android:id="@+id/dealercontact"
+                android:id="@+id/availabletools"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
@@ -46,7 +46,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/dealerdetails"
+                android:id="@+id/toolprice"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"

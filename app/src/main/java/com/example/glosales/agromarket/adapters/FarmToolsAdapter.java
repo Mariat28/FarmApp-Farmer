@@ -35,22 +35,20 @@ public class FarmToolsAdapter extends RecyclerView.Adapter<FarmToolsAdapter.MyVi
     public FarmToolsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.tools_row_item, parent, false);
 
-        return new FarmToolsAdapter.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FarmToolsAdapter.MyViewHolder holder, int position) {
-        holder.name.setText(farmToolsObjectsArrayList.get(position).getDealername());
-        holder.contact.setText(farmToolsObjectsArrayList.get(position).getDealercontact());
-        holder.photo.setImageResource(farmToolsObjectsArrayList.get(position).getDealerphoto());
-        holder.calldealer.setImageResource(farmToolsObjectsArrayList.get(position).getDealercall());
-        holder.details.setText(farmToolsObjectsArrayList.get(position).getDealerdetails());
+        holder.name.setText(farmToolsObjectsArrayList.get(position).getName());
+        holder.price.setText(farmToolsObjectsArrayList.get(position).getPrice());
+        holder.available.setText(farmToolsObjectsArrayList.get(position).getAvailable());
         holder.toolscard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog builder = new MaterialAlertDialogBuilder(context).create();
-                builder.setTitle("Contact Dealer");
-                builder.setButton(DialogInterface.BUTTON_POSITIVE, "CALL DEALER", new DialogInterface.OnClickListener() {
+                builder.setTitle("CALL TO PLACE YOUR ORDER");
+                builder.setButton(DialogInterface.BUTTON_POSITIVE, "CALL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -72,18 +70,18 @@ public class FarmToolsAdapter extends RecyclerView.Adapter<FarmToolsAdapter.MyVi
         return farmToolsObjectsArrayList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, contact, details;
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView name, price, available;
         ImageView photo, calldealer;
         CardView toolscard;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.dealername);
-            contact = itemView.findViewById(R.id.dealercontact);
+            name = itemView.findViewById(R.id.toolname);
+            price = itemView.findViewById(R.id.toolprice);
             photo = itemView.findViewById(R.id.dealerimage);
             calldealer = itemView.findViewById(R.id.productimage);
-            details = itemView.findViewById(R.id.dealerdetails);
+            available = itemView.findViewById(R.id.availabletools);
             toolscard = itemView.findViewById(R.id.toolscard);
 
 

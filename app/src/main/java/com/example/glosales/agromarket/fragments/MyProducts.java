@@ -40,6 +40,7 @@ public class MyProducts extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.myproductsfragment, container, false);
         ImageView addproduct = view.findViewById(R.id.addpicture);
+        FloatingActionButton productfab = view.findViewById(R.id.marketfab);
         RecyclerView recyclerView;
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -49,14 +50,19 @@ public class MyProducts extends Fragment {
             PlaceObject productdetails = new PlaceObject("Irish Potatoes", "All the way from kabaale");
             placeObjects.add(productdetails);
             adapter.notifyDataSetChanged();
-
-
         }
         recyclerView.setAdapter(adapter);
-
+        productfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Productdetails.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
+
 
     /*Enable options menu in this fragment*/
     @Override
