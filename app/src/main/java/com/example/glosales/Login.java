@@ -50,10 +50,6 @@ public class Login extends Fragment {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), MainActivity.class);
-//                /*intent.putExtra("farmname", retrievedname);*/
-//                startActivity(intent);
-
                 progressBar.setVisibility(View.VISIBLE);
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/farmers");
                 final String checkedpassword = Objects.requireNonNull(password.getText()).toString();
@@ -62,10 +58,8 @@ public class Login extends Fragment {
                 query.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        Log.i(TAG, "onChildAdded: " + dataSnapshot.getValue());
                         String retrievedname = dataSnapshot.child("Farm name").getValue(String.class);
                         String retrievedpassword = dataSnapshot.child("Password").getValue(String.class);
-
                         progressBar.setVisibility(View.INVISIBLE);
 
 
