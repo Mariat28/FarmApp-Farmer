@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context=".NewAccountActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/farmername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/farmnamee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/please_enter_your_name"
+                android:inputType="textCapWords"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_your_phone_number"
+                android:inputType="phone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/farmname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/farm_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/please_enter_your_farm_name"
+                android:inputType="textCapWords"
+                android:textAllCaps="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/farmlocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/famlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_your_farm_location"
+                android:inputType="textCapWords" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nationalID"
+            android:layout_width="match_parent"
+            app:counterEnabled="true"
+            app:counterMaxLength="14"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/NIN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_your_national_id_number"
+                android:inputType="textCapCharacters" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="5"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTintMode="src_atop">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/please_enter_your_password"
+                android:inputType="numberPassword"
+                android:maxLength="4" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="5"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTintMode="src_atop">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordconfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:inputType="numberPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/select_product_category"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/productcategories"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/crops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crop_husbandry" />
+
+            <RadioButton
+                android:id="@+id/dairy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dairy_farming" />
+
+            <RadioButton
+                android:id="@+id/mixed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mixed_farming" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/signinbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/login_button"
+            android:gravity="center"
+            android:text="@string/sign_in"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+</ScrollView>

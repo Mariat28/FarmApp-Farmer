@@ -11,7 +11,7 @@
         <item name="fontFamily">sans-serif-condensed</item>
     </style>
 
-    <style name="AppTheme1" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppThemeNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>

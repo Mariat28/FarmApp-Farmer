@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:id="@+id/mainView"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/login_image"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="@string/please_enter_your_pin_to_login"
+        android:textSize="20sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:counterEnabled="true"
+        app:counterMaxLength="5"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:id="@+id/pinTxt"
+            android:layout_height="wrap_content"
+            android:hint="@string/please_type_your_pin"
+            android:inputType="numberPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="@string/login" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:id="@+id/newAccountTxt"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:elevation="20dp"
+        android:text="@string/have_no_account_create_now"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
+</LinearLayout>

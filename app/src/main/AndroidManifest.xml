@@ -13,14 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".WelcomeActivity" />
         <activity android:name=".PhoneNumberVerification" />
         <activity
             android:name=".supporttools.SupportToolsMain"
             android:parentActivityName=".Home"
-            android:theme="@style/AppTheme1" />
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".farmfinancials.FarmFinancialsMain"
             android:parentActivityName=".Home" />
@@ -39,14 +44,10 @@
             android:parentActivityName=".Home" />
         <activity
             android:name=".Home"
-            android:theme="@style/AppTheme1" />
-        <activity android:name=".NewAccountActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".NewAccountActivity"
+            android:parentActivityName=".LoginActivity" />
     </application>
 
 </manifest>

@@ -1,12 +1,12 @@
 package ug.global.glofarmedited;
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -16,7 +16,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,19 +24,16 @@ import com.google.firebase.database.ValueEventListener;
 
 public class NewAccountActivity extends AppCompatActivity {
     private static String userId;
-    Context context;
     TextInputEditText password, name, farmername, confirmpassword, NIN, phone, location;
     RadioButton crophusbandry, mixed, dairy;
     RadioGroup farm_category;
     Button create;
-    ProgressBar progressBar;
-
-    FirebaseAuth firebaseAuth;
+    TextInputEditText[] textInputEditTexts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_new_account);
         password = findViewById(R.id.password);
         name = findViewById(R.id.farm_name);
         farmername = findViewById(R.id.farmnamee);
@@ -45,19 +41,21 @@ public class NewAccountActivity extends AppCompatActivity {
         confirmpassword = findViewById(R.id.passwordconfirm);
         NIN = findViewById(R.id.NIN);
         phone = findViewById(R.id.phonenumber);
-        progressBar = findViewById(R.id.progressBar2);
-        progressBar.setVisibility(View.INVISIBLE);
         crophusbandry = findViewById(R.id.crops);
         mixed = findViewById(R.id.mixed);
         dairy = findViewById(R.id.dairy);
         farm_category = findViewById(R.id.productcategories);
         create = findViewById(R.id.signinbutton);
+        password.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5)});
+        NIN.setFilters(new InputFilter[]{new InputFilter.LengthFilter(14)});
+
+        confirmpassword.setFilters(new InputFilter[]{new InputFilter.LengthFilter(5)});
+        textInputEditTexts = new TextInputEditText[]{password, name, farmername, location, confirmpassword, NIN, phone};
 
         create.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
                 newuser();
 
             }
@@ -79,6 +77,9 @@ public class NewAccountActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void newuser() {
+        for (TextInputEditText textInputEditText : textInputEditTexts) {
+            textInputEditText.setEnabled(false);
+        }
         final String savedpassword = (password.getEditableText()).toString();
         final String farmlocation = location.getEditableText().toString();
         final String farmname = name.getEditableText().toString();
@@ -116,41 +117,63 @@ public class NewAccountActivity extends AppCompatActivity {
         } else if (!crophusbandry.isChecked() && !dairy.isChecked() && !mixed.isChecked()) {
             Toast.makeText(NewAccountActivity.this, "Please select a farm category", Toast.LENGTH_LONG).show();
         } else {
-            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/farmers");
+            final DatabaseReference farmersRef = FirebaseDatabase.getInstance().getReference("/farmers");
+            final DatabaseReference farmsRef = FirebaseDatabase.getInstance().getReference("/farms");
             int checked_id = farm_category.getCheckedRadioButtonId();
             final String category = (String) ((RadioButton) findViewById(checked_id)).getText();
-            String id = databaseReference.push().getKey();
-            Farmer farmer = new Farmer(farmerName, farmercontact, nationID, farmname, farmlocation, category, savedpassword, id);
-            assert id != null;
-            databaseReference.child(id).setValue(farmer);
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            final String firebaseKeyfarmer = (farmerName+nationID).replace(" ","_");
+            String firebaseKeyfarm = (farmname+farmlocation).replace(" ","_");
+
+            Farmer farmer = new Farmer(farmerName, farmercontact, nationID, firebaseKeyfarm, farmlocation, category, savedpassword, firebaseKeyfarmer);
+            Farm farm = new Farm(farmname, category);
+            farmsRef.child(firebaseKeyfarm).setValue(farm);
+            farmersRef.child(firebaseKeyfarmer).setValue(farmer);
+            SharedPreferences sharedPreferences = getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE);
+            final SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("is_registered", true);
+            editor.putString("pin", savedpassword);
+            editor.putString("firebase_key", firebaseKeyfarmer);
+            editor.apply();
+            farmersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    name.setText("");
-                    password.setText("");
-                    farmername.setText("");
-                    confirmpassword.setText("");
-                    NIN.setText("");
-                    phone.setText("");
-                    location.setText("");
-                    mixed.setChecked(false);
-                    dairy.setChecked(false);
-                    crophusbandry.setChecked(false);
-                    progressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(NewAccountActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(NewAccountActivity.this, Home.class);
-                    startActivity(intent);
+                    Intent intent = new Intent();
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     Toast.makeText(NewAccountActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-
+                    for (TextInputEditText textInputEditText : textInputEditTexts) {
+                        textInputEditText.setEnabled(true);
+                    }
 
                 }
             });
 
 
+        }
+    }
+
+    static class Farm {
+        public Farm() {
+        }
+
+        String farmname;
+        String farmcategory;
+
+        Farm(String farmname, String farmcategory) {
+            this.farmname = farmname;
+            this.farmcategory = farmcategory;
+        }
+
+        public String getFarmname() {
+            return farmname;
+        }
+
+        public String getFarmcategory() {
+            return farmcategory;
         }
     }
 

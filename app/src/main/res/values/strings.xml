@@ -12,7 +12,7 @@
     <string name="sign_in"> Create Account</string>
     <string name="please_enter_your_farm_name">Enter your farm name</string>
     <string name="select_product_category">Select Product category</string>
-    <string name="please_enter_your_password">Enter your PIN number</string>
+    <string name="please_enter_your_password">Set a new PIN</string>
     <string name="crop_husbandry">Crop Husbandry</string>
     <string name="dairy_farming">Dairy Farming</string>
     <string name="mixed_farming">Mixed Farming</string>
@@ -88,4 +88,8 @@
     <string name="financial_report">Financial Report</string>
     <string name="enter_product_amount">Enter Product amount</string>
     <string name="please_enter_your_phone_number">Please enter Your Phone number</string>
+    <string name="please_enter_your_pin_to_login">Please enter your pin to login</string>
+    <string name="please_type_your_pin">Please type your pin</string>
+    <string name="have_no_account_create_now">Have no account? Create now</string>
+    <string name="login_image">Login image</string>
 </resources>
