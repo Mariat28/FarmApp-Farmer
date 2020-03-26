@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".supporttools.fragments.ManualsFragment">
+    android:orientation="vertical"
+    tools:context=".supporttools.fragments.Manuals">
 
     <ListView
         android:id="@+id/manualslist"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
 </LinearLayout>

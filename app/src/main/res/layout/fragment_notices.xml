@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".supporttools.fragments.NoticesFragment">
+    android:orientation="vertical"
+    tools:context=".supporttools.fragments.Notices">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginBottom="?actionBarSize"

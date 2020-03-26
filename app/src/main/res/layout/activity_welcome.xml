@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".WelcomeActivity">
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Halooo,Welcome to Glo Farm"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/getstarted"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/welcome"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Enter Your Phone Number Below to To Get Started"
+        android:textSize="18sp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phonenumberlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/getstarted"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phonecontact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/please_enter_your_phone_number"
+            android:inputType="phone"
+            android:maxLength="13" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/continuebutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phonenumberlayout"
+        android:layout_margin="10dp"
+        android:text="CONTINUE"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

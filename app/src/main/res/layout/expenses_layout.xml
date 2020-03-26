@@ -8,21 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <TextView
             android:id="@+id/Expensename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="18sp" />
-
         <TextView
             android:id="@+id/Expenseamount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="18sp" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

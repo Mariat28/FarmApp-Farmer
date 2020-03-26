@@ -13,7 +13,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:hint="@string/please_enter_your_expense_name"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -26,7 +25,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:hint="@string/please_enter_the_expense_amount"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>

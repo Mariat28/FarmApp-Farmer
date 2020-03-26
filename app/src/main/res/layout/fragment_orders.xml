@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="agromarket.fragments.Market">
+    tools:context=".agromarket.fragments.Orders">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ordersrecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 </RelativeLayout>
