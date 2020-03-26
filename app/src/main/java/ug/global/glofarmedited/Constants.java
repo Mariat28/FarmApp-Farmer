@@ -6,4 +6,5 @@ class Constants {
     static String getSharedPrefs() {
         return "settings";
     }
+
 }

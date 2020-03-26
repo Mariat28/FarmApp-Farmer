@@ -47,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:enabled="false"
         android:text="@string/login" />
 
     <com.google.android.material.textview.MaterialTextView
