@@ -4,7 +4,6 @@ package com.example.glosales;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +23,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.annotations.Nullable;
 
 import java.util.Objects;
-
-import static android.content.ContentValues.TAG;
 
 public class Login extends Fragment {
     private TextInputEditText password;
@@ -51,17 +48,16 @@ public class Login extends Fragment {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/farmers");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/farmercredentials");
                 final String checkedpassword = Objects.requireNonNull(password.getText()).toString();
                 final String checkedname = Objects.requireNonNull(name.getText()).toString();
-                Query query = reference.orderByChild("name").equalTo(checkedname);
+                Query query = reference.orderByChild("username").equalTo(checkedname);
                 query.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        String retrievedname = dataSnapshot.child("Farm name").getValue(String.class);
-                        String retrievedpassword = dataSnapshot.child("Password").getValue(String.class);
+                        String retrievedname = dataSnapshot.child("username").getValue(String.class);
+                        String retrievedpassword = dataSnapshot.child("password").getValue(String.class);
                         progressBar.setVisibility(View.INVISIBLE);
-
 
                         if ((checkedpassword.equals(retrievedpassword))) {
                             Intent intent = new Intent(getActivity(), MainActivity.class);

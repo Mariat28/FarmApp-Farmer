@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.glosales.R;
-import com.example.glosales.agromarket.Productdetails;
+import com.example.glosales.agromarket.AddProduct;
 import com.example.glosales.agromarket.adapterobjects.PlaceObject;
 import com.example.glosales.agromarket.adapters.MyProductsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -55,7 +55,7 @@ public class MyProducts extends Fragment {
         productfab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Productdetails.class);
+                Intent intent = new Intent(getActivity(), AddProduct.class);
                 startActivity(intent);
             }
         });
@@ -85,7 +85,7 @@ public class MyProducts extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.newproduct) {
-            Intent intent = new Intent(getActivity(), Productdetails.class);
+            Intent intent = new Intent(getActivity(), AddProduct.class);
             startActivity(intent);
 
         }

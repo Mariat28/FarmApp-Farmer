@@ -1,7 +1,7 @@
 package com.example.glosales.farmfinancials;
 
 
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,36 +9,55 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.glosales.R;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class IncomeFragment extends Fragment {
-    private TextView farmname;
-    private TextView total_stock;
-    private TextInputEditText openingstock;
-
+    private ArrayList<String> listViewObjectsArrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_stock__details, container, false);
-        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
+        View view = inflater.inflate(R.layout.new_income_layout, container, false);
+        FloatingActionButton newpdt = view.findViewById(R.id.addmyproduct);
+        newpdt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
+                builder.setView(R.layout.incomealert);
+                builder.setTitle("Add Product");
+                builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.create();
+                builder.show();
+            }
+        });
+        ListView listView = view.findViewById(R.id.productlist);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>((Objects.requireNonNull(getActivity())), R.layout.manuals_list_row_item, listViewObjectsArrayList);
+        listViewObjectsArrayList.add("Beans");
+        listViewObjectsArrayList.add("Milk");
+        listViewObjectsArrayList.add("Gnuts");
+        adapter.notifyDataSetChanged();
+        listView.setAdapter(adapter);
+
+
+/*        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
         String retrievedfarmname = intent.getStringExtra("farmname");
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/farmercredentials");
@@ -125,7 +144,7 @@ public class IncomeFragment extends Fragment {
                 });
 
             }
-        });
+        });*/
 
         return view;
     }

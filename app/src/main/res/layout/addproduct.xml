@@ -30,12 +30,14 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/desclayout"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="50dp"
         android:layout_margin="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/productdescriptioninput"
             android:layout_width="match_parent"
+
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:hint="@string/productdesc"

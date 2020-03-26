@@ -17,6 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".LoginnActivity"></activity>
+        <activity android:name=".NewAccountActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".agromarket.ToolDetails" />
         <activity
             android:name=".agromarket.FarmTools"
@@ -31,11 +39,10 @@
         <activity
             android:name=".agromarket.ProductsActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity android:name=".agromarket.OrderDetails" />
-
-        <activity android:name=".agromarket.Productdetails" />
-
+        <activity
+            android:name=".agromarket.AddProduct"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginTabbedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,7 +50,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".farmfinancials.FarmFinancialsMain"
             android:parentActivityName=".MainActivity" />

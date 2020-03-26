@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,6 +28,15 @@ public class CreateAccount extends Fragment {
     private RadioButton crophusbandry, mixed, dairy;
     private RadioGroup farm_category;
     private ProgressBar progressBar;
+    private FirebaseAuth mAuth;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+  /*      if(mAuth.getCurrentUser()!=null){
+
+        }*/
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,20 +57,19 @@ public class CreateAccount extends Fragment {
         farm_category = view.findViewById(R.id.productcategories);
         Button signIn = view.findViewById(R.id.signinbutton);
         progressBar.setVisibility(View.INVISIBLE);
-
+        mAuth = FirebaseAuth.getInstance();
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                String savedpassword = Objects.requireNonNull(password.getText()).toString();
-                String farmlocation = Objects.requireNonNull(location.getText()).toString();
-                String farmname = Objects.requireNonNull(name.getText()).toString();
-                String farmerName = Objects.requireNonNull(farmername.getText()).toString();
+                final String savedpassword = Objects.requireNonNull(password.getText()).toString();
+                final String farmlocation = Objects.requireNonNull(location.getText()).toString();
+                final String farmname = Objects.requireNonNull(name.getText()).toString();
+                final String farmerName = Objects.requireNonNull(farmername.getText()).toString();
                 String confirmedpassword = Objects.requireNonNull(confirmpassword.getText()).toString();
-                String nationID = Objects.requireNonNull(NIN.getText()).toString();
-                String farmercontact = Objects.requireNonNull(phone.getText()).toString();
-
+                final String nationID = Objects.requireNonNull(NIN.getText()).toString();
+                final String farmercontact = Objects.requireNonNull(phone.getText()).toString();
 
                 if (farmerName.length() == 0) {
                     farmername.requestFocus();
@@ -92,8 +101,26 @@ public class CreateAccount extends Fragment {
                     Toast.makeText(getActivity(), "Please select a farm category", Toast.LENGTH_LONG).show();
                 } else {
                     int checked_id = farm_category.getCheckedRadioButtonId();
-                    String category = (String) ((RadioButton) view.findViewById(checked_id)).getText();
-                    DatabaseReference farmers = FirebaseDatabase.getInstance().getReference("/farmers");
+                    final String category = (String) ((RadioButton) view.findViewById(checked_id)).getText();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("/farmerdetails");
+                    DatabaseReference credentials = FirebaseDatabase.getInstance().getReference("/farmercredentials");
+                    DatabaseReference farmers = reference.push();
+                    DatabaseReference farmercredentials = credentials.push();
+                    String key = farmers.getKey();
+                    Farmer farmer = new Farmer(farmercontact, nationID, farmname, farmlocation, category, key);
+                    assert key != null;
+                    reference.child(key).setValue(farmer);
+                    Credentials credentials1 = new Credentials(farmerName, savedpassword);
+                    farmercredentials.child(key).setValue(credentials1);
+
+                    Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("farmkey", key);
+                    startActivity(intent);
+
+
+                  /*  DatabaseReference farmers = FirebaseDatabase.getInstance().getReference("/farmers");
                     DatabaseReference farms = FirebaseDatabase.getInstance().getReference("/farms");
                     DatabaseReference farmer_child = farmers.push();
                     DatabaseReference farm_child = farms.push();
@@ -127,7 +154,7 @@ public class CreateAccount extends Fragment {
                     Toast.makeText(getActivity(), "Successfully created your farm account", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("farmname", farmname);
-                    startActivity(intent);
+                    startActivity(intent);*/
                 }
             }
         });
@@ -135,24 +162,31 @@ public class CreateAccount extends Fragment {
         return view;
     }
 
+    private void registerfarmer() {
+
+    }
+
     static class Farmer {
         String name;
         String phone;
         String NIN;
-
+        String farmname;
+        String farmlocation;
+        String category;
         String password;
         String farmkey;
 
-        Farmer(String name, String phone, String NIN, String password, String farmkey) {
+        Farmer(String phone, String NIN, String farmname, String farmlocation, String category, String farmkey) {
             this.name = name;
             this.phone = phone;
             this.NIN = NIN;
-            this.password = password;
+            this.farmlocation = farmlocation;
+            this.category = category;
             this.farmkey = farmkey;
         }
 
-        public String getName() {
-            return name;
+        public String getFarmkey() {
+            return farmkey;
         }
 
         public String getPhone() {
@@ -163,37 +197,39 @@ public class CreateAccount extends Fragment {
             return NIN;
         }
 
+        public String getFarmname() {
+            return farmname;
+        }
+
+        public String getFarmlocation() {
+            return farmlocation;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+
+    }
+
+    static class Credentials {
+        String username;
+        String password;
+
+        Credentials(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
         public String getPassword() {
             return password;
         }
 
-        public String getFarmkey() {
-            return farmkey;
-        }
-    }
 
-    static class Farm {
-        String name;
-        String location;
-        String product;
-
-        Farm(String name, String location, String product) {
-            this.name = name;
-            this.location = location;
-            this.product = product;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getLocation() {
-            return location;
-        }
-
-        public String getProduct() {
-            return product;
-        }
     }
 }
 

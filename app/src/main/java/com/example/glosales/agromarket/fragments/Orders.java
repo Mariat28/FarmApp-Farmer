@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.glosales.R;
-import com.example.glosales.agromarket.Productdetails;
+import com.example.glosales.agromarket.AddProduct;
 import com.example.glosales.agromarket.adapterobjects.OrderObject;
 import com.example.glosales.agromarket.adapters.OrdersAdapter;
 
@@ -73,7 +73,7 @@ public class Orders extends Fragment {
 
         if (id == R.id.search) {
 
-            Intent intent = new Intent(getActivity(), Productdetails.class);
+            Intent intent = new Intent(getActivity(), AddProduct.class);
             startActivity(intent);
 
         }
