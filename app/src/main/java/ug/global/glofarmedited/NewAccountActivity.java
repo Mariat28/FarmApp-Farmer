@@ -133,6 +133,7 @@ public class NewAccountActivity extends AppCompatActivity {
             editor.putBoolean("is_registered", true);
             editor.putString("pin", savedpassword);
             editor.putString("firebase_key", firebaseKeyfarmer);
+            editor.putString("farm_name", farmname);
             editor.apply();
             farmersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

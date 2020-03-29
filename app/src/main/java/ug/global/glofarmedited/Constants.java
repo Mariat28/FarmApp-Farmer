@@ -1,9 +1,9 @@
 package ug.global.glofarmedited;
 
-class Constants {
+public class Constants {
     static final int NEW_FARM_REQUEST_CODE = 1001;
 
-    static String getSharedPrefs() {
+    public static String getSharedPrefs() {
         return "settings";
     }
 

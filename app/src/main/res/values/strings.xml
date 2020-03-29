@@ -92,4 +92,5 @@
     <string name="please_type_your_pin">Please type your pin</string>
     <string name="have_no_account_create_now">Have no account? Create now</string>
     <string name="login_image">Login image</string>
+    <string name="enter_product_unit_price">Enter Product Unit Price</string>
 </resources>
