@@ -25,9 +25,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final Button button=findViewById(R.id.loginButton);
+        final Button button = findViewById(R.id.loginButton);
         snackbarView = findViewById(R.id.mainView);
-        TextView create=findViewById(R.id.newAccountTxt);
+        TextView create = findViewById(R.id.newAccountTxt);
         create.setVisibility(getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getBoolean("is_registered", false) ? View.INVISIBLE : View.VISIBLE);
 
         final TextInputEditText textInputEditText = findViewById(R.id.pinTxt);
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                button.setEnabled(s.length()>=4);
+                button.setEnabled(s.length() >= 4);
 
             }
         });
@@ -54,10 +54,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 textInputEditText.setEnabled(false);
                 button.setEnabled(false);
-                String pin=textInputEditText.getEditableText().toString().trim();
-                if (pin.equals(getSharedPreferences(Constants.getSharedPrefs(),MODE_PRIVATE).getString("pin",null))){
-                    startActivity(new Intent(LoginActivity.this,Home.class));
-                }else{
+                String pin = textInputEditText.getEditableText().toString().trim();
+                if (pin.equals(getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("pin", null))) {
+                    startActivity(new Intent(LoginActivity.this, Home.class));
+                } else {
                     textInputEditText.setEnabled(true);
                     Snackbar.make(snackbarView, "Unknown PIN", BaseTransientBottomBar.LENGTH_SHORT).setBackgroundTint(getResources().getColor(R.color.design_default_color_error)).show();
 
