@@ -1,19 +1,22 @@
 package ug.global.glofarmedited.farmfinancials.adapterobjects;
 
 public class ExpenseClass {
-    private String expense_name;
-    private String expense_amount;
+    private String expensename;
+    private String expenseamount;
 
-    public ExpenseClass(String expense_name, String expense_amount) {
-        this.expense_name = expense_name;
-        this.expense_amount = expense_amount;
+    public ExpenseClass() {
     }
 
-    public String getExpense_name() {
-        return expense_name;
+    public ExpenseClass(String expensename, String expenseamount) {
+        this.expensename = expensename;
+        this.expenseamount = expenseamount;
     }
 
-    public String getExpense_amount() {
-        return expense_amount;
+    public String getExpensename() {
+        return expensename;
+    }
+
+    public String getExpenseamount() {
+        return expenseamount;
     }
 }

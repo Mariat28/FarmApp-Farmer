@@ -2,7 +2,6 @@ package ug.global.glofarmedited.agromarket.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import ug.global.glofarmedited.Constants;
 import ug.global.glofarmedited.R;
@@ -49,26 +47,18 @@ public class Products extends Fragment {
         final String farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
         DatabaseReference product_reference = FirebaseDatabase.getInstance().getReference("/products");
         final String key = product_reference.getKey();
-        assert key != null;
         Query query = product_reference.orderByChild("farmkey").equalTo(farm_name);
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if (dataSnapshot.exists()) {
-
-                    HashMap<String, String> hashMap = (HashMap<String, String>) dataSnapshot.getValue();
-                    Log.i("checking data", "Checking data" + hashMap.toString());
-                    String name = hashMap.get("productname");
-                    String description = hashMap.get("productdescription");
-                    String price = hashMap.get("productprice");
-                   /* assert farm_name != null;
-                    assert key != null;
-                    String name=dataSnapshot.child("productname").getValue(String.class);
-                    String description=dataSnapshot.child("productdescription").getValue(String.class);
-                    Log.i("checking data", "Checking data"+name+description);*/
+                    ProductObjects products = dataSnapshot.getValue(ProductObjects.class);
+                    assert products != null;
+                    String name = products.getProductname();
+                    String description = products.getProductdescription();
+                    String price = products.getProductprice();
                     ProductObjects productObjects = new ProductObjects(name, description, price);
                     productObjectsArrayList.add(productObjects);
-
                     productsAdapter.notifyDataSetChanged();
                     recyclerView.setAdapter(productsAdapter);
 

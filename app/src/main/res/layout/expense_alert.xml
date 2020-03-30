@@ -7,24 +7,30 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/expense_name"
+            android:layout_height="match_parent"
+            android:inputType="textCapWords"
+            android:maxLines="1"
             android:hint="@string/please_enter_your_expense_name"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/expense_amount"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:maxLines="1"
             android:hint="@string/please_enter_the_expense_amount"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>

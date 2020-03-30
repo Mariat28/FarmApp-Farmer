@@ -8,7 +8,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/productlayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -16,22 +16,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/enter_product_name"
+            android:maxLines="1"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/desclayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:background="@color/white">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/productdescriptioninput"
+            android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/productdesc"
-            android:padding="10dp"
             android:textSize="18sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -39,11 +39,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/productpricelayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/productprice"
+            android:inputType="number"
+            android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/enter_product_unit_price"
