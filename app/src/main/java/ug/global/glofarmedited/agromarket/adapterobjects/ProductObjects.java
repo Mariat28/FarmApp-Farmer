@@ -2,15 +2,15 @@ package ug.global.glofarmedited.agromarket.adapterobjects;
 
 public class ProductObjects {
     private String productname;
-    private String productdescription;
+    private String productavailability;
     private String productprice;
 
     public ProductObjects() {
     }
 
-    public ProductObjects(String productname, String productdescription, String productprice) {
+    public ProductObjects(String productname, String productavailability, String productprice) {
         this.productname = productname;
-        this.productdescription = productdescription;
+        this.productavailability = productavailability;
         this.productprice = productprice;
     }
 
@@ -18,8 +18,8 @@ public class ProductObjects {
         return productname;
     }
 
-    public String getProductdescription() {
-        return productdescription;
+    public String getProductavailability() {
+        return productavailability;
     }
 
 

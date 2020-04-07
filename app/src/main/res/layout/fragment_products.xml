@@ -10,7 +10,6 @@
         android:id="@+id/productsrecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addproduct"
         android:layout_alignParentEnd="true"

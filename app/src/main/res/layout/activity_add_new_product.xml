@@ -1,80 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:scrollbars="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/productlayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/productnameinput"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productlayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/enter_product_name"
-            android:maxLines="1"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/desclayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/productnameinput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/enter_product_name"
+                android:maxLines="1"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/productdescriptioninput"
-            android:maxLines="1"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/desclayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/productdesc"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/productdescriptioninput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/productdesc"
+                android:lines="1"
+                android:maxLines="1"
+                android:textSize="18sp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/productpricelayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/productprice"
-            android:inputType="number"
-            android:maxLines="1"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/productpricelayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/enter_product_unit_price"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/productprice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/enter_product_unit_price"
+                android:inputType="number"
+                android:maxLines="1"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
+            android:text="@string/click_to_add_a_product_image"
             android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:text="@string/click_to_add_a_product_image"
-        android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/addpicture"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/click_to_add_a_product_image"
+            app:srcCompat="@drawable/ic_add_gray" />
 
-    <ImageView
-        android:id="@+id/addpicture"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:contentDescription="@string/click_to_add_a_product_image"
-        app:srcCompat="@drawable/ic_add_gray" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/upload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:text="@string/upload"
-        android:textColor="@color/white"
-        app:cornerRadius="10dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="@string/upload"
+            android:textColor="@color/white"
+            app:cornerRadius="10dp" />
 </LinearLayout>
+</ScrollView>

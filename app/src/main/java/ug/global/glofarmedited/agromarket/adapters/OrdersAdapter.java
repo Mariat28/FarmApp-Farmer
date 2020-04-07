@@ -38,9 +38,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.name.setText(orderObjects.get(position).getClientname());
-        holder.contact.setText(orderObjects.get(position).getClientcontact());
-        holder.details.setText(orderObjects.get(position).getOrderdetails());
+        holder.clientname.setText(orderObjects.get(position).getShopname());
+        holder.productname.setText(orderObjects.get(position).getProductname());
+        holder.quantity.setText(orderObjects.get(position).getQuantity());
+        holder.cost.setText(orderObjects.get(position).getOrderamount());
+        holder.timestamp.setText(orderObjects.get(position).getTimestamp());
+        holder.location.setText(orderObjects.get(position).getShoplocation());
         holder.ordercard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,14 +75,17 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, contact, details;
+        TextView clientname, productname, quantity, cost, timestamp, location;
         CardView ordercard;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.clientname);
-            contact = itemView.findViewById(R.id.clientcontact);
-            details = itemView.findViewById(R.id.orderdetails);
+            clientname = itemView.findViewById(R.id.clientname);
+            productname = itemView.findViewById(R.id.productname);
+            quantity = itemView.findViewById(R.id.quantity);
+            cost = itemView.findViewById(R.id.productcost);
+            timestamp = itemView.findViewById(R.id.timestamp);
+            location = itemView.findViewById(R.id.location);
             ordercard = itemView.findViewById(R.id.ordercard);
 
 

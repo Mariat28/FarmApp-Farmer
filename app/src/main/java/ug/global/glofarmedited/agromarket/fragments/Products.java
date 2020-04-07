@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +34,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class Products extends Fragment {
     private ArrayList<ProductObjects> productObjectsArrayList = new ArrayList<>();
     private RecyclerView recyclerView;
+    private AlertDialog alert;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +43,7 @@ public class Products extends Fragment {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
         FloatingActionButton addproduct = view.findViewById(R.id.addproduct);
         recyclerView = view.findViewById(R.id.productsrecyclerview);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         final ProductsAdapter productsAdapter = new ProductsAdapter(productObjectsArrayList, getActivity());
@@ -48,14 +51,18 @@ public class Products extends Fragment {
         DatabaseReference product_reference = FirebaseDatabase.getInstance().getReference("/products");
         final String key = product_reference.getKey();
         Query query = product_reference.orderByChild("farmkey").equalTo(farm_name);
+
+
         query.addChildEventListener(new ChildEventListener() {
+
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if (dataSnapshot.exists()) {
+
                     ProductObjects products = dataSnapshot.getValue(ProductObjects.class);
                     assert products != null;
                     String name = products.getProductname();
-                    String description = products.getProductdescription();
+                    String description = products.getProductavailability();
                     String price = products.getProductprice();
                     ProductObjects productObjects = new ProductObjects(name, description, price);
                     productObjectsArrayList.add(productObjects);

@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.ChildEventListener;
@@ -60,7 +61,6 @@ public class Expenses extends Fragment {
         final ExpenseAdapter adapter = new ExpenseAdapter(getActivity(), expenseClassArrayList);
         final String retrieved_farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/expenses");
-        final String key = databaseReference.getKey();
         Query query = databaseReference.orderByChild("farmkey").equalTo(retrieved_farm_name);
         query.addChildEventListener(new ChildEventListener() {
             @Override
@@ -104,11 +104,11 @@ public class Expenses extends Fragment {
             @Override
             public void onClick(final View v) {
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/expenses");
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                androidx.appcompat.app.AlertDialog builder = new MaterialAlertDialogBuilder(getContext()).create();
                 builder.setTitle("Add Expense Details");
                 final View view = getLayoutInflater().inflate(R.layout.expense_alert, null);
                 builder.setView(view);
-                builder.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                builder.setButton(DialogInterface.BUTTON_POSITIVE, "SAVE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         expensename = view.findViewById(R.id.expense_name);
@@ -150,14 +150,13 @@ public class Expenses extends Fragment {
 
                     }
                 });
-                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                builder.setButton(DialogInterface.BUTTON_NEGATIVE, "CANCEL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
                     }
                 });
-                builder.create();
                 builder.show();
             }
 

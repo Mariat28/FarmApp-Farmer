@@ -7,13 +7,13 @@
     tools:context=".farmfinancials.fragments.Expenses">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/expense_recycler"
+        android:id="@+id/inputs_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/expensefab"
+        android:id="@+id/inputsfab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

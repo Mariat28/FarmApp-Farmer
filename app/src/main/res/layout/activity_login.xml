@@ -16,7 +16,7 @@
         android:layout_height="100dp"
         android:layout_marginBottom="20dp"
         android:contentDescription="@string/login_image"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_crops" />
 
     <TextView
         android:id="@+id/textTitle"

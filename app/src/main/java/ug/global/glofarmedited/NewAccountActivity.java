@@ -134,6 +134,8 @@ public class NewAccountActivity extends AppCompatActivity {
             editor.putString("pin", savedpassword);
             editor.putString("firebase_key", firebaseKeyfarmer);
             editor.putString("farm_name", farmname);
+            editor.putString("farm_location", farmlocation);
+            editor.putString("category", category);
             editor.apply();
             farmersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
