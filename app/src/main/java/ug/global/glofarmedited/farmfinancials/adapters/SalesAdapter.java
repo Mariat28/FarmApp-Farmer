@@ -32,8 +32,9 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.name.setText(salesObjectsArrayList.get(position).getName());
-        holder.price.setText(salesObjectsArrayList.get(position).getAmount());
+        holder.name.setText(salesObjectsArrayList.get(position).getProductname());
+        holder.price.setText(String.valueOf(salesObjectsArrayList.get(position).getProductcost()));
+        holder.time.setText(salesObjectsArrayList.get(position).getTimestamp());
 
     }
 
@@ -43,12 +44,13 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.MyViewHolder
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, price;
+        TextView name, price, time;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.salesproductname);
             price = itemView.findViewById(R.id.salesproductamount);
+            time = itemView.findViewById(R.id.salestimestamp);
 
 
         }

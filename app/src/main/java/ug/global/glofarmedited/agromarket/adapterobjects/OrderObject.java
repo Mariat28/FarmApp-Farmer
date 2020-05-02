@@ -7,6 +7,7 @@ public class OrderObject {
     private String quantity;
     private String shoplocation;
     private String timestamp;
+    private String id;
 
     public OrderObject() {
     }
@@ -42,5 +43,13 @@ public class OrderObject {
 
     public String getShoplocation() {
         return shoplocation;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

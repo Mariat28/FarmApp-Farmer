@@ -2,20 +2,29 @@ package ug.global.glofarmedited.farmfinancials.adapterobjects;
 
 
 public class SalesObjects {
-    private String name;
-    private String amount;
+    private String productname;
+    private Long productcost;
+    private String timestamp;
 
-    public SalesObjects(String name, String amount) {
-        this.name = name;
-        this.amount = amount;
+    public SalesObjects() {
     }
 
-    public String getName() {
-        return name;
+    public SalesObjects(String name, Long productcost, String timestamp) {
+        this.productname = name;
+        this.productcost = productcost;
+        this.timestamp = timestamp;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getProductname() {
+        return productname;
+    }
+
+    public Long getProductcost() {
+        return productcost;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
     }
 }
 

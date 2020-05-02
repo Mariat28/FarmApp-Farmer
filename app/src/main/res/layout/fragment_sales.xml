@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".farmfinancials.fragments.Sales">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/nosalesimage"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/icon"
+        android:src="@drawable/ic_profit"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/nosalestext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nosalesimage"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="@string/no_sales_have_been_made_today"
+        android:visibility="invisible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productlist"
@@ -13,22 +39,15 @@
         android:layout_margin="10dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/cart"
+        android:id="@+id/reportfloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/addmyproduct"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="5dp"
-        app:srcCompat="@drawable/ic_shopping_cart_black_24dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addmyproduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:clickable="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
-        app:srcCompat="@drawable/ic_add_black_24dp" />
+        android:focusable="true"
+        android:src="@drawable/ic_monetization_on_black_24dp" />
 
 
 </RelativeLayout>

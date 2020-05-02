@@ -34,8 +34,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.name.setText(productObjectsArrayList.get(position).getProductname());
-        holder.desc.setText(productObjectsArrayList.get(position).getProductavailability());
+        holder.desc.setText(String.valueOf(productObjectsArrayList.get(position).getProductavailability()));
         holder.price.setText(productObjectsArrayList.get(position).getProductprice());
+        holder.unit.setText(productObjectsArrayList.get(position).getProductunit());
 
     }
 
@@ -45,13 +46,14 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name, desc, price;
+        TextView name, desc, price, unit;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             desc = itemView.findViewById(R.id.productdescription);
             name = itemView.findViewById(R.id.productname);
             price = itemView.findViewById(R.id.productprices);
+            unit = itemView.findViewById(R.id.productunit);
 
         }
     }

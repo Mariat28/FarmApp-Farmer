@@ -90,7 +90,7 @@ public class AnimalSupplies extends Fragment {
         inflater.inflate(R.menu.menus, menu);
         super.onCreateOptionsMenu(menu, inflater);
         //hide item (sort)
-        menu.findItem(R.id.newproduct).setVisible(false);
+        menu.findItem(R.id.sortmenu).setVisible(false);
         menu.findItem(R.id.settings).setVisible(false);
         menu.findItem(R.id.Profile).setVisible(false);
         menu.findItem(R.id.expenses).setVisible(false);

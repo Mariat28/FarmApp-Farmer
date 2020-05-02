@@ -31,9 +31,9 @@
     <string name="enter_your_phone_number">Enter your Phone number</string>
     <string name="enter_product_name">Enter Product Name</string>
     <string name="click_to_add_a_product_image">Click to add a product Image</string>
-    <string name="productdesc">Enter Product description</string>
+    <string name="productdesc">Enter Available Product Amount</string>
     <string name="customer_helpline">Customer Helpline</string>
-    <string name="my_products">Add new Product</string>
+    <string name="my_products">Sort </string>
     <string name="my_profile">My Profile</string>
     <string name="settings">settings</string>
     <string name="appsettings">Settings</string>
@@ -94,4 +94,21 @@
     <string name="login_image">Login image</string>
     <string name="enter_product_unit_price">Enter Product Unit Price</string>
     <string name="icon">icon</string>
+    <string name="confirmedstatus">confirmed</string>
+    <string name="_12_02_2019">12/02/2019</string>
+    <string name="total_sales">Total Sales</string>
+    <string name="_2000000_ugx">0 UGX</string>
+    <string name="investment_input">Investment/Input</string>
+    <string name="expenditure">Expenditure</string>
+    <string name="profits_made">Profits Made</string>
+    <string name="losses_made">Losses made</string>
+    <string name="select_date_to_view_report">Tap Calendar to View Report</string>
+    <string name="no_orders_have_been_placed_today_you_will_be_notified_incase_new_orders_arrive">No Orders Have been placed Today,You will be notified incase new orders Arrive</string>
+    <string name="no_sales_have_been_made_today">No sales Have been made Today</string>
+    <string name="enter_product_units_i_e_mls_kgs_litres_e_t_c">Enter product Units i.e mls/kgs/litres e.t.c</string>
+    <string name="you_haven_t_added_any_expenses_today">You haven\'t added any Expenses Today</string>
+    <string name="you_haven_t_added_any_inputs_today">You haven\'t added any Inputs Today</string>
+    <string name="tap_to_view_notice">Tap to view Notice</string>
+    <string name="new_orders">New Orders</string>
+    <string name="productsTAB">MY PRODUCTS</string>
 </resources>

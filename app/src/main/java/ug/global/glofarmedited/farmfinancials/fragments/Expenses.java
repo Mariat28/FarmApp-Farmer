@@ -1,16 +1,18 @@
 package ug.global.glofarmedited.farmfinancials.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,11 +30,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 import ug.global.glofarmedited.Constants;
 import ug.global.glofarmedited.R;
+import ug.global.glofarmedited.farmfinancials.FarmFinancialsMain;
 import ug.global.glofarmedited.farmfinancials.adapterobjects.ExpenseClass;
 import ug.global.glofarmedited.farmfinancials.adapters.ExpenseAdapter;
 
@@ -43,7 +51,9 @@ public class Expenses extends Fragment {
     private TextInputEditText expensename, expenseamount;
     private String farm_name, name, amount;
     private Context context;
-
+    private ProgressBar progressBar;
+    private ImageView noexpenses;
+    private TextView noexpensestext;
     public Expenses() {
         expenseClassArrayList = new ArrayList<>();
     }
@@ -55,17 +65,24 @@ public class Expenses extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_expenses, container, false);
         final RecyclerView recyclerView;
+        noexpenses = view.findViewById(R.id.noexpensesimage);
+        noexpensestext = view.findViewById(R.id.noexpensestext);
         recyclerView = view.findViewById(R.id.expense_recycler);
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         final ExpenseAdapter adapter = new ExpenseAdapter(getActivity(), expenseClassArrayList);
         final String retrieved_farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/expenses");
         Query query = databaseReference.orderByChild("farmkey").equalTo(retrieved_farm_name);
+        final String date = new SimpleDateFormat("dd / MM / yyy", Locale.getDefault()).format(new Date());
+
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if (dataSnapshot.exists()) {
+                if (dataSnapshot.exists() && (Objects.equals(dataSnapshot.child("date").getValue(String.class), date))) {
+                    progressBar.setVisibility(View.INVISIBLE);
                     ExpenseClass expenseClass = dataSnapshot.getValue(ExpenseClass.class);
                     assert expenseClass != null;
                     String name = expenseClass.getExpensename();
@@ -85,6 +102,9 @@ public class Expenses extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(getActivity(), "Expense list cleared..Refresh to see changes", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), FarmFinancialsMain.class));
 
             }
 
@@ -98,6 +118,25 @@ public class Expenses extends Fragment {
 
             }
         });
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    noexpenses.setVisibility(View.VISIBLE);
+                    noexpensestext.setVisibility(View.VISIBLE);
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         FloatingActionButton expensefab = view.findViewById(R.id.expensefab);
         expensefab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("InflateParams")
@@ -117,7 +156,7 @@ public class Expenses extends Fragment {
                         amount = expenseamount.getEditableText().toString();
                         farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
                         String key = databaseReference.push().getKey();
-                        FirebaseExpenseObjects firebaseExpenseObjects = new FirebaseExpenseObjects(name, amount, farm_name);
+                        FirebaseExpenseObjects firebaseExpenseObjects = new FirebaseExpenseObjects(name, amount, farm_name, date);
                         assert key != null;
                         databaseReference.child(key).setValue(firebaseExpenseObjects);
                         databaseReference.addChildEventListener(new ChildEventListener() {
@@ -178,52 +217,29 @@ public class Expenses extends Fragment {
         inflater.inflate(R.menu.menus, menu);
         super.onCreateOptionsMenu(menu, inflater);
         //hide item (sort)
-        menu.findItem(R.id.newproduct).setVisible(false);
-
+        menu.findItem(R.id.sortmenu).setVisible(false);
+        menu.findItem(R.id.Profile).setVisible(false);
+        menu.findItem(R.id.search).setVisible(false);
+        menu.findItem(R.id.expenses).setVisible(true);
 
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //handle menu item clicks
-        int id = item.getItemId();
-
-        if (id == R.id.expenses) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("Are You sure you want to delete all expenses");
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.create();
-            builder.show();
-
-        }
-
-
-        return super.onOptionsItemSelected(item);
-    }
 
     public static class FirebaseExpenseObjects {
         private String expensename;
         private String expenseamount;
         private String farmkey;
+        private String date;
 
         public FirebaseExpenseObjects() {
         }
 
-        FirebaseExpenseObjects(String expensename, String expenseamount, String farmkey) {
+        FirebaseExpenseObjects(String expensename, String expenseamount, String farmkey, String date) {
             this.expensename = expensename;
             this.expenseamount = expenseamount;
             this.farmkey = farmkey;
+            this.date = date;
         }
 
         public String getExpensename() {
@@ -236,6 +252,10 @@ public class Expenses extends Fragment {
 
         public String getFarmkey() {
             return farmkey;
+        }
+
+        public String getDate() {
+            return date;
         }
     }
 

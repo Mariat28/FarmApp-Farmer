@@ -62,9 +62,11 @@ public class Products extends Fragment {
                     ProductObjects products = dataSnapshot.getValue(ProductObjects.class);
                     assert products != null;
                     String name = products.getProductname();
-                    String description = products.getProductavailability();
+                    int description = products.getProductavailability();
                     String price = products.getProductprice();
-                    ProductObjects productObjects = new ProductObjects(name, description, price);
+                    String unit = products.getProductunit();
+
+                    ProductObjects productObjects = new ProductObjects(name, description, price, unit);
                     productObjectsArrayList.add(productObjects);
                     productsAdapter.notifyDataSetChanged();
                     recyclerView.setAdapter(productsAdapter);

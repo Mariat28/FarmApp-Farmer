@@ -5,6 +5,33 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".farmfinancials.fragments.Expenses">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/noexpensesimage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/icon"
+        android:src="@drawable/ic_attach_money_black_24dp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/noexpensestext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/noexpensesimage"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="@string/you_haven_t_added_any_expenses_today"
+        android:visibility="invisible" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/expense_recycler"
         android:layout_width="match_parent"

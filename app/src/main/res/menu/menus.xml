@@ -9,8 +9,8 @@
         android:title="@string/settings"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/newproduct"
-        android:icon="@drawable/ic_add_black_24dp"
+        android:id="@+id/sortmenu"
+        android:icon="@drawable/ic_sort_black_24dp"
         android:title="@string/my_products"
         app:showAsAction="ifRoom" />
     <item

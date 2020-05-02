@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,11 +12,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="10dp"
-
         android:weightSum="5">
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
@@ -53,13 +53,29 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp" />
         </LinearLayout>
-        <ImageView
-            android:layout_height="50dp"
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_margin="20dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/icon"
-            android:src="@drawable/ic_shopping_cart" />
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_shopping_cart" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

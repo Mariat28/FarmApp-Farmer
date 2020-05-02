@@ -24,10 +24,9 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:contentDescription="@string/tempicon"
-                app:srcCompat="@drawable/ic_launcher" />
+                app:srcCompat="@drawable/ic_farming" />
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -35,6 +34,21 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="end"
+                android:contentDescription="@string/tempicon"
+                app:srcCompat="@drawable/ic_milk" />
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="end"
+                android:contentDescription="@string/tempicon"
+                app:srcCompat="@drawable/ic_dairy" />
+
 
         </LinearLayout>
 
