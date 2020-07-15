@@ -27,40 +27,55 @@
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/desclayout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp">
+            android:weightSum="3">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/productdescriptioninput"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/desclayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/productdescriptioninput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/productdesc"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:hint="@string/productdesc"
-                android:inputType="number"
-                android:lines="1"
-                android:maxLines="1"
-                android:textSize="18sp" />
+                android:layout_weight="1" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/productunitsinput"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/enter_product_units_i_e_mls_kgs_litres_e_t_c"
-                android:inputType="textCapWords"
-                android:lines="1"
-                android:maxLines="1"
-                android:textSize="18sp" />
+        <!--     <com.google.android.material.textfield.TextInputLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="5dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                 <com.google.android.material.textfield.TextInputEditText
+                     android:id="@+id/productunitsinput"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:hint="@string/enter_product_units_i_e_mls_kgs_litres_e_t_c"
+                     android:inputType="textCapWords"
+                     android:lines="1"
+                     android:maxLines="1"
+                     android:textSize="18sp" />
+
+             </com.google.android.material.textfield.TextInputLayout>-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/productpricelayout"

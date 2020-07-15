@@ -25,7 +25,7 @@
     <string name="client_name">Client Name:</string>
     <string name="client_contact">Client Contact</string>
     <string name="phone">phone</string>
-    <string name="please_enter_your_name">Please enter your name</string>
+    <string name="please_enter_your_name">Please enter your first name</string>
     <string name="enter_your_national_id_number">Enter your National ID Number</string>
     <string name="confirm_password">Confirm PIN</string>
     <string name="enter_your_phone_number">Enter your Phone number</string>
@@ -49,7 +49,7 @@
     <string name="products">Products</string>
     <string name="farm_tools">Farm Tools</string>
     <string name="supplies">Supplies</string>
-    <string name="manuals">Manuals</string>
+    <string name="manuals">FAQs</string>
     <string name="notices">Notices</string>
     <string name="stories">Stories</string>
     <string name="todo">TODO</string>
@@ -111,4 +111,26 @@
     <string name="tap_to_view_notice">Tap to view Notice</string>
     <string name="new_orders">New Orders</string>
     <string name="productsTAB">MY PRODUCTS</string>
+    <string name="zerougx">0 UGX</string>
+    <string name="ask_a_question">Ask A question</string>
+    <string name="enter_question">Enter Question</string>
+    <string name="view_full_business_report">View Full Business Report</string>
+    <string name="please_enter_your_lastname">Please enter your lastname</string>
+    <string-array name="dairy_units">
+        <item>litres</item>
+        <item>packets</item>
+        <item>Tins</item>
+        <item>Kgs</item>
+    </string-array>
+    <string-array name="crop_units">
+        <item>Kgs</item>
+        <item>Bunches</item>
+    </string-array>
+    <string-array name="mixed_units">
+        <item>Kgs</item>
+        <item>Bunches</item>
+        <item>litres</item>
+        <item>packets</item>
+        <item>Tins</item>
+    </string-array>
 </resources>

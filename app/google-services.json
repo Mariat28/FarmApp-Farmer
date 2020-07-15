@@ -1,21 +1,50 @@
 {
   "project_info": {
-    "project_number": "994924797191",
-    "firebase_url": "https://glo-sales.firebaseio.com",
-    "project_id": "glo-sales",
-    "storage_bucket": "glo-sales.appspot.com"
+    "project_number": "113629666814",
+    "firebase_url": "https://glo-sales-34240.firebaseio.com",
+    "project_id": "glo-sales-34240",
+    "storage_bucket": "glo-sales-34240.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:994924797191:android:aa19e2f3c1282f795879a2",
+        "mobilesdk_app_id": "1:113629666814:android:17882eb96574934c1834af",
+        "android_client_info": {
+          "package_name": "com.example.glofarmerclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113629666814-ddpc4kke888t3n8v1d1t9qj90oedsl6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWoKJvkSvrE-P422oxI-KYv0pbUP7mD0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "113629666814-ddpc4kke888t3n8v1d1t9qj90oedsl6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113629666814:android:6d6f26a911acc8211834af",
         "android_client_info": {
           "package_name": "com.example.glosales"
         }
       },
       "oauth_client": [
         {
-          "client_id": "994924797191-j9807mepb5tsrmsg8gpsrud0aekv6lrn.apps.googleusercontent.com",
+          "client_id": "113629666814-g70ikcrblfkubk01otu2qodreqmiptue.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.glosales",
@@ -23,20 +52,20 @@
           }
         },
         {
-          "client_id": "994924797191-ivca365iqej93ad13g85s27svcr6273c.apps.googleusercontent.com",
+          "client_id": "113629666814-ddpc4kke888t3n8v1d1t9qj90oedsl6b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyANxyGrqZOns-j1zy6qAJVrN-GP9HZQldY"
+          "current_key": "AIzaSyCWoKJvkSvrE-P422oxI-KYv0pbUP7mD0E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "994924797191-ivca365iqej93ad13g85s27svcr6273c.apps.googleusercontent.com",
+              "client_id": "113629666814-ddpc4kke888t3n8v1d1t9qj90oedsl6b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -45,14 +74,14 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:994924797191:android:19fb40eb25033dbb5879a2",
+        "mobilesdk_app_id": "1:113629666814:android:67a68e5ba6d8d6261834af",
         "android_client_info": {
           "package_name": "ug.global.glofarmadmin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "994924797191-jm0iconiv5hlk64ftv3v103lo09vn2ft.apps.googleusercontent.com",
+          "client_id": "113629666814-m419mohikgpopjfp308r5tmsm234t6b5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ug.global.glofarmadmin",
@@ -60,20 +89,20 @@
           }
         },
         {
-          "client_id": "994924797191-ivca365iqej93ad13g85s27svcr6273c.apps.googleusercontent.com",
+          "client_id": "113629666814-ddpc4kke888t3n8v1d1t9qj90oedsl6b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyANxyGrqZOns-j1zy6qAJVrN-GP9HZQldY"
+          "current_key": "AIzaSyCWoKJvkSvrE-P422oxI-KYv0pbUP7mD0E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "994924797191-ivca365iqej93ad13g85s27svcr6273c.apps.googleusercontent.com",
+              "client_id": "113629666814-ddpc4kke888t3n8v1d1t9qj90oedsl6b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -82,27 +111,35 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:994924797191:android:0fb930296bcb9dd55879a2",
+        "mobilesdk_app_id": "1:113629666814:android:755faebe52faea6f1834af",
         "android_client_info": {
           "package_name": "ug.global.glofarmedited"
         }
       },
       "oauth_client": [
         {
-          "client_id": "994924797191-ivca365iqej93ad13g85s27svcr6273c.apps.googleusercontent.com",
+          "client_id": "113629666814-i39k5cmp0vjq8i5edbqi7r1j891embsn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ug.global.glofarmedited",
+            "certificate_hash": "3623492ebc127a6942c981d7af66af69701c7cd2"
+          }
+        },
+        {
+          "client_id": "113629666814-ddpc4kke888t3n8v1d1t9qj90oedsl6b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyANxyGrqZOns-j1zy6qAJVrN-GP9HZQldY"
+          "current_key": "AIzaSyCWoKJvkSvrE-P422oxI-KYv0pbUP7mD0E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "994924797191-ivca365iqej93ad13g85s27svcr6273c.apps.googleusercontent.com",
+              "client_id": "113629666814-ddpc4kke888t3n8v1d1t9qj90oedsl6b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

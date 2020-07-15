@@ -2,20 +2,20 @@ package ug.global.glofarmedited.supporttools.adapters;
 
 public class ListViewObjects {
 
-    private String manualdate;
-    private String manualname;
+    private String question;
+    private String answer;
 
-    public ListViewObjects(String manualname, String manualdate) {
-        this.manualname = manualname;
-        this.manualdate = manualdate;
+    public ListViewObjects(String answer, String question) {
+        this.answer = answer;
+        this.question = question;
     }
 
-    String getManualname() {
-        return manualname;
+    String getAnswer() {
+        return answer;
     }
 
-    String getManualdate() {
-        return manualdate;
+    String getQuestion() {
+        return question;
     }
 
 

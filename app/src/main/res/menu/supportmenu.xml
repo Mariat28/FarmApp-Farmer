@@ -2,19 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/sort"
-        android:icon="@drawable/ic_sort_black_24dp"
-        android:title="@string/sort_by"
+        android:id="@+id/askaquestion"
+        android:icon="@drawable/ic_live_help_black_24dp"
+        android:title="@string/ask_a_question"
         app:showAsAction="always|withText">
-        <menu>
-            <item
-                android:id="@+id/date"
-                android:title="@string/date" />
-
-            <item
-                android:id="@+id/alphabeticalorder"
-                android:title="@string/alphabetical_order" />
-        </menu>
     </item>
 
 </menu>

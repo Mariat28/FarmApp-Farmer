@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,14 +23,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-import ug.global.glofarmedited.Constants;
 import ug.global.glofarmedited.R;
 import ug.global.glofarmedited.agromarket.AddNewProduct;
 import ug.global.glofarmedited.agromarket.adapterobjects.ProductObjects;
 import ug.global.glofarmedited.agromarket.adapters.ProductsAdapter;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class Products extends Fragment {
     private ArrayList<ProductObjects> productObjectsArrayList = new ArrayList<>();
@@ -43,14 +42,15 @@ public class Products extends Fragment {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
         FloatingActionButton addproduct = view.findViewById(R.id.addproduct);
         recyclerView = view.findViewById(R.id.productsrecyclerview);
-
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         final ProductsAdapter productsAdapter = new ProductsAdapter(productObjectsArrayList, getActivity());
-        final String farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
+        final String key = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
+        // final String farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
         DatabaseReference product_reference = FirebaseDatabase.getInstance().getReference("/products");
-        final String key = product_reference.getKey();
-        Query query = product_reference.orderByChild("farmkey").equalTo(farm_name);
+
+        Query query = product_reference.orderByChild("userid").equalTo(key);
 
 
         query.addChildEventListener(new ChildEventListener() {

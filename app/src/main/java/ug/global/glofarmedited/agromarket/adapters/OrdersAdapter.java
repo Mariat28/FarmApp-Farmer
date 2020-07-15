@@ -1,6 +1,8 @@
 package ug.global.glofarmedited.agromarket.adapters;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -80,12 +82,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
                                 final String quantity = holder.quantity.getText().toString();
                                 long cost = Long.parseLong((holder.cost.getText().toString()));
                                 final String time = holder.timestamp.getText().toString().trim();
-                                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/sales");
+                                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/farms");
                                 final String farm_name = context.getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
                                 final String key = databaseReference.push().getKey();
                                 SalesObjects salesObjects = new SalesObjects(productname, cost, time, quantity, farm_name);
                                 assert key != null;
-                                databaseReference.child(key).setValue(salesObjects);
+                                assert farm_name != null;
+                                databaseReference.child(farm_name).child("sales").child(key).setValue(salesObjects);
 
                                 final DatabaseReference orderref = FirebaseDatabase.getInstance().getReference("/orders");
                                 Query query = orderref.orderByChild("farmname").equalTo(farm_name);
@@ -97,8 +100,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
                                         orderObjectArrayList.remove(position);
                                         notifyItemRemoved(position);
                                         orderref.child(key).removeValue();
-                                        Toast.makeText(context, "Order Confirmed, refresh to see changes", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Order Confirmed, and added as a Sale", Toast.LENGTH_SHORT).show();
+                                        ProgressDialog progressDialog = new ProgressDialog(context);
+                                        progressDialog.setMessage("Updating Order List");
+                                        progressDialog.show();
                                         context.startActivity(new Intent(context, ProductsActivityMain.class));
+                                        progressDialog.dismiss();
+                                        ((Activity) context).finish();
 
                                     }
 
@@ -110,11 +118,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
                                     @Override
                                     public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                                         String key = dataSnapshot.child("orderkey").getValue(String.class);
-                                        assert key != null;
+                                       /* assert key != null;
                                         orderObjectArrayList.remove(position);
-                                        notifyItemRemoved(position);
-                                        orderref.child(key).removeValue();
-                                        Toast.makeText(context, "Order Confirmed, refresh to see changes", Toast.LENGTH_SHORT).show();
+                                        notifyItemRemoved(position);*/
+                                        assert key != null;
+                                        orderref.child(key).removeValue();/*
+                                        context.startActivity(new Intent(context, ProductsActivityMain.class));
+                                        ((Activity)context).finish();*/
 
                                         //context.startActivity(new Intent(context, ProductsActivityMain.class));
 

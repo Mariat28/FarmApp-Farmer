@@ -12,6 +12,7 @@
         android:layout_height="match_parent" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addproduct"
+        android:backgroundTint="@color/colorAccent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"

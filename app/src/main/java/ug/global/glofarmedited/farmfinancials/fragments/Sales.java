@@ -4,13 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,8 +27,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -48,10 +48,14 @@ import static android.content.Context.MODE_PRIVATE;
 public class Sales extends Fragment {
     private ArrayList<SalesObjects> salesObjectsArrayList = new ArrayList<>();
     private ProgressBar progressBar;
+    private StorageReference mStorageRef;
     private MaterialTextView totalsales, expenditure, profits, losses, input;
     private long sum = 0;
     private long expenses = 0;
     private long inputs = 0;
+    private long overallsales;
+    private long overallinputs;
+    private long overallexpenses;
     //ProgressDialog progressDialog;
     private ImageView nosalesimage;
     private TextView nosalestextview;
@@ -78,12 +82,21 @@ public class Sales extends Fragment {
         final SalesAdapter adapter = new SalesAdapter(getActivity(), salesObjectsArrayList);
         final String farm_name = Objects.requireNonNull(getActivity()).getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
 
-        DatabaseReference expenseref = FirebaseDatabase.getInstance().getReference("/expenses");
+        assert farm_name != null;
+        final DatabaseReference expenseref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("expenses");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault());
+        final String timestamp = dateFormat.format(Calendar.getInstance().getTime());
         expenseref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if (Objects.equals(dataSnapshot.child("farmkey").getValue(String.class), farm_name)) {
+                if (Objects.equals(dataSnapshot.child("farmkey").getValue(String.class), farm_name) && (dataSnapshot.child("date").getValue(String.class)).equals(timestamp)) {
                     expenses += Long.parseLong(dataSnapshot.child("expenseamount").getValue(String.class));
+                    totalexpenses();
+                    overallexpenses = expenses++;
+                    Log.i("TAG", "overallexpenses: " + overallexpenses);
+                    final DatabaseReference oref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("overallexpenses");
+                    oref.setValue(overallexpenses);
+
                     // totalexpenses();
                 }
             }
@@ -108,28 +121,17 @@ public class Sales extends Fragment {
 
             }
         });
-        final DatabaseReference inputref = FirebaseDatabase.getInstance().getReference("/inputs");
+        final DatabaseReference inputref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("inputs");
         inputref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                if (Objects.equals(dataSnapshot.child("farmkey").getValue(String.class), farm_name) && dataSnapshot.exists()) {
+                if (Objects.equals(dataSnapshot.child("farmkey").getValue(String.class), farm_name) && dataSnapshot.exists() && (dataSnapshot.child("date").getValue(String.class)).equals(timestamp)) {
                     inputs += Long.parseLong(dataSnapshot.child("inputcost").getValue(String.class));
-                 /*   DatabaseReference totalinputref=FirebaseDatabase.getInstance().getReference("/totalinputs");
-                   // final String farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
-                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault());
-
-                    String timestamp = dateFormat.format(Calendar.getInstance().getTime());
-                    Date today=new Date();
-                    Calendar calendar=Calendar.getInstance();
-                    calendar.setTime(today);
-                    int dayofweek=calendar.get(Calendar.DAY_OF_MONTH);
-                    int month=(calendar.get(Calendar.MONTH))+1;
-
-                    String key=farm_name+dayofweek+month;
-                    TotalObject totalObject=new TotalObject(key,farm_name,inputs,timestamp);
-
-                    totalinputref.child(key).setValue(totalObject);*/
+                    totalinputs();
+                    overallinputs = inputs++;
+                    final DatabaseReference oref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("overallinputs");
+                    oref.setValue(overallinputs);
 
 
                 }
@@ -155,19 +157,17 @@ public class Sales extends Fragment {
 
             }
         });
-        final DatabaseReference salesref = FirebaseDatabase.getInstance().getReference("/sales");
-        final Query query = salesref.orderByChild("farmname").equalTo(farm_name);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault());
-        final String timestamp = dateFormat.format(Calendar.getInstance().getTime());
+        final DatabaseReference salesref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("sales");
 
-
-        query.addChildEventListener(new ChildEventListener() {
+        salesref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 String salestimestamp = dataSnapshot.child("timestamp").getValue(String.class);
                 assert salestimestamp != null;
                 if (dataSnapshot.exists() && salestimestamp.equals(timestamp)) {
+                    nosalesimage.setVisibility(View.INVISIBLE);
+                    nosalestextview.setVisibility(View.INVISIBLE);
                     progressDialog.dismiss();
                     SalesObjects salesObjects = dataSnapshot.getValue(SalesObjects.class);
                     assert salesObjects != null;
@@ -179,11 +179,10 @@ public class Sales extends Fragment {
                     adapter.notifyDataSetChanged();
                     sum += dataSnapshot.child("productcost").getValue(Long.class);
                     totalsales();
-                    totalexpenses();
-                    totalinputs();
-
+                    //   totalexpenses();
+                    //  totalinputs();
                     long profitsmade = sum - (expenses + inputs);
-                    DatabaseReference profitref = FirebaseDatabase.getInstance().getReference("/totalsales");
+                    final DatabaseReference profitref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("totalsales");
                     final String farm_name = Objects.requireNonNull(getActivity()).getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault());
                     String timestamp = dateFormat.format(Calendar.getInstance().getTime());
@@ -192,16 +191,19 @@ public class Sales extends Fragment {
                     calendar.setTime(today);
                     int dayofweek = calendar.get(Calendar.DAY_OF_MONTH);
                     int month = (calendar.get(Calendar.MONTH)) + 1;
-                    String key = farm_name + dayofweek + month;
+                    String key = "date:" + dayofweek + month;
                     if (profitsmade > 0) {
                         profitref.child(key).child("profits").setValue(profitsmade);
-                        Toast.makeText(getActivity(), "first prof saved", Toast.LENGTH_SHORT).show();
 
                     } else {
                         profitref.child(key).child("losses").setValue(profitsmade);
-                        Toast.makeText(getActivity(), "first loss saved", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "first loss saved", Toast.LENGTH_SHORT).show();
 
                     }
+                    overallsales = sum++;
+                    assert farm_name != null;
+                    final DatabaseReference oref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("overallsales");
+                    oref.setValue(overallsales);
 
 
                 } else {
@@ -237,7 +239,7 @@ public class Sales extends Fragment {
 
             }
         });
-        query.addValueEventListener(new ValueEventListener() {
+        salesref.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -272,6 +274,7 @@ public class Sales extends Fragment {
                 TextView datetext = view1.findViewById(R.id.salesdate);
                 datetext.setText(date);
                 totalsales = view1.findViewById(R.id.totaldailysales);
+                Log.i("TAG", "fabsum " + sum);
                 totalsales.setText(String.valueOf(sum));
                 input = view1.findViewById(R.id.dailyinputs);
                 input.setText(String.valueOf(inputs));
@@ -329,8 +332,9 @@ public class Sales extends Fragment {
 
 
     private void totalinputs() {
-        DatabaseReference totalinputref = FirebaseDatabase.getInstance().getReference("/totalinputs");
         final String farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
+        assert farm_name != null;
+        DatabaseReference totalinputref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("totalinputs");
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault());
 
         String timestamp = dateFormat.format(Calendar.getInstance().getTime());
@@ -340,18 +344,20 @@ public class Sales extends Fragment {
         int dayofweek = calendar.get(Calendar.DAY_OF_MONTH);
         int month = (calendar.get(Calendar.MONTH)) + 1;
 
-        String key = farm_name + dayofweek + month;
-        TotalObject totalObject = new TotalObject(key, farm_name, inputs, timestamp);
+        String key = "date:" + dayofweek + month;
+        //String key=totalinputref.push().getKey();
+        TotalObject totalObject = new TotalObject(inputs, timestamp);
 
         totalinputref.child(key).setValue(totalObject);
 
     }
 
     private void totalexpenses() {
-        DatabaseReference totalinputref = FirebaseDatabase.getInstance().getReference("/totalexpenses");
-        final String farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault());
 
+        final String farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
+        assert farm_name != null;
+        DatabaseReference totalexpenseref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("totalexpenses");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault());
         String timestamp = dateFormat.format(Calendar.getInstance().getTime());
         Date today = new Date();
         Calendar calendar = Calendar.getInstance();
@@ -359,17 +365,21 @@ public class Sales extends Fragment {
         int dayofweek = calendar.get(Calendar.DAY_OF_MONTH);
         int month = (calendar.get(Calendar.MONTH)) + 1;
 
-        String key = farm_name + dayofweek + month;
-        TotalObject totalObject = new TotalObject(key, farm_name, expenses, timestamp);
+        String key = "date:" + dayofweek + month;
+        // String key=totalexpenseref.push().getKey();
+        Log.i("TAG", "totalexpenses: " + expenses);
+        TotalObject totalObject = new TotalObject(expenses, timestamp);
 
-        totalinputref.child(key).setValue(totalObject);
+        totalexpenseref.child(key).setValue(totalObject);
 
 
     }
 
     private void totalsales() {
-        DatabaseReference totalinputref = FirebaseDatabase.getInstance().getReference("/totalsales");
+
         final String farm_name = Objects.requireNonNull(getActivity()).getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
+        assert farm_name != null;
+        DatabaseReference totalsalesref = FirebaseDatabase.getInstance().getReference("/farms").child(farm_name).child("totalsales");
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault());
 
         String timestamp = dateFormat.format(Calendar.getInstance().getTime());
@@ -379,10 +389,11 @@ public class Sales extends Fragment {
         int dayofweek = calendar.get(Calendar.DAY_OF_MONTH);
         int month = (calendar.get(Calendar.MONTH)) + 1;
 
-        String key = farm_name + dayofweek + month;
-        TotalObject totalObject = new TotalObject(key, farm_name, sum, timestamp);
+        String key = "date:" + dayofweek + month;
+        //String key=totalsalesref.push().getKey();
+        TotalObject totalObject = new TotalObject(sum, timestamp);
 
-        totalinputref.child(key).setValue(totalObject);
+        totalsalesref.child(key).setValue(totalObject);
 
     }
 }
@@ -394,7 +405,7 @@ class TotalObject {
     private String date;
 
 
-    public TotalObject(String key, String farmname, long amount, String date) {
+    public TotalObject(long amount, String date) {
         this.key = key;
         this.farmname = farmname;
         this.amount = amount;

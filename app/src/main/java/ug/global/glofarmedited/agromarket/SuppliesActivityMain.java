@@ -21,6 +21,9 @@ public class SuppliesActivityMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agro_market_main);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        //   handleintent(getIntent());
+
+
         TabLayout tabLayout = findViewById(R.id.supplies_tab_layout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final ViewPager viewPager = findViewById(R.id.supplies_viewpager);
@@ -45,5 +48,28 @@ public class SuppliesActivityMain extends AppCompatActivity {
             }
         });
 
+
     }
+
+/*    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleintent(getIntent());
+    }
+
+    private void handleintent(Intent intent){
+        if(Intent.ACTION_SEARCH.equals(intent.getAction())){
+            String query=intent.getStringExtra(SearchManager.QUERY);
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menus,menu);
+        SearchManager searchManager=(SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        androidx.appcompat.widget.SearchView searchView= (androidx.appcompat.widget.SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        return true;
+    }*/
 }

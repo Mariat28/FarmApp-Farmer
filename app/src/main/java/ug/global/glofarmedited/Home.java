@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,7 +39,7 @@ public class Home extends AppCompatActivity {
         agromarketcard = findViewById(R.id.agromarket);
         supporttoolscard = findViewById(R.id.supporttoolscard);
         market_card_panel = findViewById(R.id.market_card_panel);
-        inputtrackingcard = findViewById(R.id.inputtrackingcard);
+        //inputtrackingcard = findViewById(R.id.inputtrackingcard);
         supplies = findViewById(R.id.supplies);
         farm_tools = findViewById(R.id.farm_tools);
         products = findViewById(R.id.products);
@@ -81,18 +80,20 @@ public class Home extends AppCompatActivity {
         supporttoolscard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //   Toast.makeText(Home.this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(Home.this, SupportToolsMain.class);
                 startActivity(intent);
 
 
             }
         });
-        inputtrackingcard.setOnClickListener(new View.OnClickListener() {
+     /*   inputtrackingcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Home.this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 
     void openMarket(int text_view_id) {

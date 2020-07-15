@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +47,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class Inputs extends Fragment {
     private ArrayList<InputObjects> inputObjectsArrayList;
     private TextInputEditText name, cost;
-    private ProgressBar progressBar;
+    //  private ProgressBar progressBar;
     private TextView noinputstext;
     private ImageView noinputsimage;
 
@@ -65,22 +64,24 @@ public class Inputs extends Fragment {
         noinputsimage = view.findViewById(R.id.noinputsimage);
         noinputstext = view.findViewById(R.id.noinputstext);
         recyclerView = view.findViewById(R.id.inputs_recycler);
-        progressBar = view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
+        //  progressBar = view.findViewById(R.id.progressBar);
+        //   progressBar.setVisibility(View.VISIBLE);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         final InputsAdapter adapter = new InputsAdapter(inputObjectsArrayList, getActivity());
         final String retrieved_farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/inputs");
+        assert retrieved_farm_name != null;
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/farms").child(retrieved_farm_name).child("inputs");
         Query query = databaseReference.orderByChild("farmkey").equalTo(retrieved_farm_name);
         final String date = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date());
-
-        query.addChildEventListener(new ChildEventListener() {
+        databaseReference.addChildEventListener(new ChildEventListener() {
 
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if (dataSnapshot.exists() && (Objects.equals(dataSnapshot.child("date").getValue(String.class), date))) {
-                    progressBar.setVisibility(View.INVISIBLE);
+                    //progressBar.setVisibility(View.INVISIBLE);
+                    noinputsimage.setVisibility(View.INVISIBLE);
+                    noinputstext.setVisibility(View.INVISIBLE);
                     InputObjects inputObjects = dataSnapshot.getValue(InputObjects.class);
                     assert inputObjects != null;
                     String name = inputObjects.getInputname();
@@ -91,7 +92,9 @@ public class Inputs extends Fragment {
                     recyclerView.setAdapter(adapter);
 
                 } else {
-                    progressBar.setVisibility(View.INVISIBLE);
+                    //  progressBar.setVisibility(View.INVISIBLE);
+                    noinputsimage.setVisibility(View.VISIBLE);
+                    noinputstext.setVisibility(View.VISIBLE);
                 }
 
 
@@ -104,9 +107,7 @@ public class Inputs extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                progressBar.setVisibility(View.INVISIBLE);
-                startActivity(new Intent(getActivity(), FarmFinancialsMain.class));
-                Objects.requireNonNull(getActivity()).finish();
+
 
             }
 
@@ -120,14 +121,13 @@ public class Inputs extends Fragment {
 
             }
         });
-        query.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.exists() && (!Objects.equals(dataSnapshot.child("date").getValue(String.class), date))) {
-                    progressBar.setVisibility(View.INVISIBLE);
+                if (!dataSnapshot.exists()) {
+                    // progressBar.setVisibility(View.INVISIBLE);
                     noinputsimage.setVisibility(View.VISIBLE);
                     noinputstext.setVisibility(View.VISIBLE);
-
 
                 }
 
@@ -141,13 +141,13 @@ public class Inputs extends Fragment {
         });
 
 
+
         FloatingActionButton inputsfab = view.findViewById(R.id.inputsfab);
         inputsfab.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("InflateParams")
             @Override
             public void onClick(View v) {
-                final DatabaseReference inputreference = FirebaseDatabase.getInstance().getReference("/inputs");
-                androidx.appcompat.app.AlertDialog builder = new MaterialAlertDialogBuilder(getContext()).create();
+                androidx.appcompat.app.AlertDialog builder = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext())).create();
                 final View view = getLayoutInflater().inflate(R.layout.inputs_alert, null);
                 builder.setView(view);
                 builder.setTitle("Add Input Details");
@@ -158,44 +158,52 @@ public class Inputs extends Fragment {
                         cost = view.findViewById(R.id.inputamount);
                         String inputname = name.getEditableText().toString();
                         String inputcost = cost.getEditableText().toString();
-                        String farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
-                        String date = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date());
-                        // String inputid=farm_name+date;
-                        String key = inputreference.push().getKey();
-                        FirebaseInputObjects firebaseInputObjects = new FirebaseInputObjects(inputname, inputcost, farm_name, date);
-                        assert key != null;
-                        inputreference.child(key).setValue(firebaseInputObjects);
-                        inputreference.addChildEventListener(new ChildEventListener() {
-                            @Override
-                            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                noinputsimage.setVisibility(View.INVISIBLE);
-                                noinputstext.setVisibility(View.INVISIBLE);
-                                Toast.makeText(getActivity(), "Input added successfully", Toast.LENGTH_SHORT).show();
-                            }
+                        if (inputname.length() == 0) {
+                            name.setError("Please enter expense name to proceed");
+                            name.requestFocus();
+                        } else if (inputcost.length() == 0) {
+                            cost.setError("Please enter expense amount to proceed");
+                            cost.requestFocus();
+                        } else {
 
-                            @Override
-                            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                            String date = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date());
+                            String key = databaseReference.push().getKey();
+                            FirebaseInputObjects firebaseInputObjects = new FirebaseInputObjects(inputname, inputcost, retrieved_farm_name, date);
+                            assert key != null;
+                            databaseReference.child(key).setValue(firebaseInputObjects);
+                            databaseReference.addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                    //  progressBar.setVisibility(View.INVISIBLE);
+                                    noinputsimage.setVisibility(View.INVISIBLE);
+                                    noinputstext.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(getActivity(), "Input added successfully", Toast.LENGTH_SHORT).show();
+                                }
 
-                            }
+                                @Override
+                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                            @Override
-                            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                                startActivity(new Intent(getActivity(), FarmFinancialsMain.class));
-                                getActivity().finish();
+                                }
 
-                            }
+                                @Override
+                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                                    startActivity(new Intent(getActivity(), FarmFinancialsMain.class));
+                                    getActivity().finish();
 
-                            @Override
-                            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                }
 
-                            }
+                                @Override
+                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                }
 
-                            }
-                        });
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+
 
 
                     }

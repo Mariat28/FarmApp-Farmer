@@ -40,7 +40,7 @@ public class Stories extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         //inflate menu
         inflater.inflate(R.menu.supportmenu, menu);
-        menu.findItem(R.id.sort).setVisible(false);
+        menu.findItem(R.id.askaquestion).setVisible(false);
         super.onCreateOptionsMenu(menu, inflater);
 
     }

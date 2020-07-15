@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context=".farmfinancials.FarmFinancialsMain">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/farmfinancialstabslayout"
         android:layout_width="match_parent"

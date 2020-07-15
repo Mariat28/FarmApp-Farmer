@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".agromarket.fragments.AnimalSupplies">
+    <!--    <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchview"
+            android:iconifiedByDefault="false">
+            <requestFocus/></SearchView>-->
+    <TextView
+        android:id="@+id/searchresult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suppliesrecycler"

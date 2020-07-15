@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <external-files-path
-        name="glofarm_product_images"
-        path="Android/data/ug.global.glofarmedited/files/Pictures" />
+        name="my_images"
+        path="/" />
 
 </paths>

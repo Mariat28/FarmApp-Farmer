@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -33,7 +35,7 @@ public class FinancialReportActivity extends AppCompatActivity {
     ImageView calendar;
     private MaterialTextView totalsales, expenditure, profits, losses, dailyinputs;
 
-    private long totaldateinputs, totaldatesales, totaldateexpenses, profit, loss;
+    private long totaldateinputs, totaldatesales, totaldateexpenses, profit, loss, overallsales, overrallexpenses, overallinputs;
 
 
     @Override
@@ -79,11 +81,13 @@ public class FinancialReportActivity extends AppCompatActivity {
                                         profit = dataSnapshot.child("profits").getValue(long.class);
                                         totalsales.setText(String.valueOf(totaldatesales));
                                         profits.setText(String.valueOf(profit));
+                                        losses.setText(R.string.zerougx);
                                     } else if ((dataSnapshot.exists() && Objects.equals(dataSnapshot.child("date").getValue(String.class), selecteddates) && dataSnapshot.child("losses").exists())) {
                                         totaldatesales = dataSnapshot.child("amount").getValue(long.class);
                                         loss = dataSnapshot.child("losses").getValue(long.class);
                                         totalsales.setText(String.valueOf(totaldatesales));
                                         losses.setText(String.valueOf(loss).replace("-", ""));
+                                        profits.setText(R.string.zerougx);
 
                                     }
 
@@ -190,14 +194,19 @@ public class FinancialReportActivity extends AppCompatActivity {
                                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     if (dataSnapshot.exists() && Objects.equals(dataSnapshot.child("date").getValue(String.class), selecteddates) && dataSnapshot.child("profits").exists()) {
                                         totaldatesales = dataSnapshot.child("amount").getValue(long.class);
+                                        overallsales = totaldatesales++;
+                                        Log.i(TAG, "overallsales" + overallsales);
                                         profit = dataSnapshot.child("profits").getValue(long.class);
+
                                         totalsales.setText(String.valueOf(totaldatesales));
                                         profits.setText(String.valueOf(profit));
+                                        losses.setText(R.string.zerougx);
                                     } else if ((dataSnapshot.exists() && Objects.equals(dataSnapshot.child("date").getValue(String.class), selecteddates) && dataSnapshot.child("losses").exists())) {
                                         totaldatesales = dataSnapshot.child("amount").getValue(long.class);
                                         loss = dataSnapshot.child("losses").getValue(long.class);
                                         totalsales.setText(String.valueOf(totaldatesales));
                                         losses.setText(String.valueOf(loss).replace("-", ""));
+                                        profits.setText(R.string.zerougx);
 
                                     }
 
@@ -231,6 +240,7 @@ public class FinancialReportActivity extends AppCompatActivity {
                                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     if (dataSnapshot.exists() && Objects.equals(dataSnapshot.child("date").getValue(String.class), selecteddates)) {
                                         totaldateexpenses = dataSnapshot.child("amount").getValue(long.class);
+                                        overrallexpenses = totaldateexpenses++;
                                         expenditure.setText(String.valueOf(totaldateexpenses));
                                     }
 
@@ -266,6 +276,7 @@ public class FinancialReportActivity extends AppCompatActivity {
                                     Log.i(TAG, "onChildAdded: " + dataSnapshot);
                                     if (dataSnapshot.exists() && Objects.equals(dataSnapshot.child("date").getValue(String.class), selecteddates)) {
                                         totaldateinputs = dataSnapshot.child("amount").getValue(long.class);
+                                        overallinputs = totaldateinputs++;
                                         dailyinputs.setText(String.valueOf(totaldateinputs));
                                     }
 
@@ -328,5 +339,20 @@ public class FinancialReportActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.financialsmenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.fullreport) {
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 

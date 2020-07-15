@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import ug.global.glofarmedited.R;
 import ug.global.glofarmedited.agromarket.adapterobjects.SupplierObjects;
@@ -27,12 +28,16 @@ import ug.global.glofarmedited.agromarket.adapterobjects.SupplierObjects;
 import static androidx.core.content.ContextCompat.startActivity;
 
 public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHolder> {
-    private ArrayList<SupplierObjects> supplierObjectsArrayList;
+    private ArrayList<SupplierObjects> supplierObjectsArrayList = null;
+    private ArrayList<SupplierObjects> supplierObjects;
     private LayoutInflater layoutInflater;
 
     public SupplierAdapter(ArrayList<SupplierObjects> supplierObjectsArrayList, Context context) {
         this.supplierObjectsArrayList = supplierObjectsArrayList;
+        //this.supplierObjects.addAll(supplierObjectsArrayList);
         layoutInflater = LayoutInflater.from(context);
+        this.supplierObjects = new ArrayList<SupplierObjects>();
+        this.supplierObjects.addAll(supplierObjectsArrayList);
     }
 
 
@@ -45,16 +50,32 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        holder.name.setText(supplierObjectsArrayList.get(position).getProductname());
+        holder.name.setText(supplierObjectsArrayList.get(position).getSupplyname());
         holder.price.setText(supplierObjectsArrayList.get(position).getPrice());
-        holder.availability.setText(supplierObjectsArrayList.get(position).getAvailablesupply());
-        holder.photo.setImageResource(supplierObjectsArrayList.get(position).getPhoto());
+        holder.availability.setText(supplierObjectsArrayList.get(position).getAvailableamount());
+        // holder.photo.setImageResource(supplierObjectsArrayList.get(position).getPhoto());
 
     }
 
     @Override
     public int getItemCount() {
         return supplierObjectsArrayList.size();
+    }
+
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        supplierObjectsArrayList.clear();
+        if (charText.length() == 0) {
+            supplierObjectsArrayList.addAll(supplierObjects);
+        } else {
+            for (SupplierObjects sp : supplierObjects) {
+                if (sp.getSupplyname().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    supplierObjectsArrayList.add(sp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,7 +89,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
             name = itemView.findViewById(R.id.productname);
             availability = itemView.findViewById(R.id.availablesupply);
             price = itemView.findViewById(R.id.supplyprice);
-            photo = itemView.findViewById(R.id.productphoto);
+            // photo = itemView.findViewById(R.id.productphoto);
             supplycard = itemView.findViewById(R.id.marketcard);
             supplycard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,5 +117,6 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
                 }
             });
         }
+
     }
 }

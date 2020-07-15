@@ -68,19 +68,28 @@
             android:parentActivityName=".agromarket.ProductsActivityMain" />
         <activity
             android:name=".agromarket.ProductsActivityMain"
+            android:label="Your Shop"
             android:parentActivityName=".Home" />
         <activity
             android:name=".agromarket.FarmTools"
             android:parentActivityName=".Home" />
         <activity
             android:name=".agromarket.SuppliesActivityMain"
-            android:parentActivityName=".Home" />
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Home"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".farmfinancials.FarmFinancialsMain"
-            android:parentActivityName=".Home" />
+            android:parentActivityName=".Home"
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".NewAccountActivity"
             android:parentActivityName=".LoginActivity" />

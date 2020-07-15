@@ -29,7 +29,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -49,7 +48,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class Expenses extends Fragment {
     private ArrayList<ExpenseClass> expenseClassArrayList;
     private TextInputEditText expensename, expenseamount;
-    private String farm_name, name, amount;
+    private String name, amount;
     private Context context;
     private ProgressBar progressBar;
     private ImageView noexpenses;
@@ -74,11 +73,12 @@ public class Expenses extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         final ExpenseAdapter adapter = new ExpenseAdapter(getActivity(), expenseClassArrayList);
         final String retrieved_farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/expenses");
-        Query query = databaseReference.orderByChild("farmkey").equalTo(retrieved_farm_name);
-        final String date = new SimpleDateFormat("dd / MM / yyy", Locale.getDefault()).format(new Date());
+        assert retrieved_farm_name != null;
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/farms").child(retrieved_farm_name).child("expenses");
+        // Query query = databaseReference.orderByChild("farmkey").equalTo(retrieved_farm_name);
+        final String date = new SimpleDateFormat("dd/MM/yyy", Locale.getDefault()).format(new Date());
 
-        query.addChildEventListener(new ChildEventListener() {
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if (dataSnapshot.exists() && (Objects.equals(dataSnapshot.child("date").getValue(String.class), date))) {
@@ -91,6 +91,10 @@ public class Expenses extends Fragment {
                     expenseClassArrayList.add(expenseClass1);
                     adapter.notifyDataSetChanged();
                     recyclerView.setAdapter(adapter);
+                } else {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    noexpensestext.setVisibility(View.VISIBLE);
+                    noexpenses.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -118,7 +122,7 @@ public class Expenses extends Fragment {
 
             }
         });
-        query.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
@@ -142,7 +146,7 @@ public class Expenses extends Fragment {
             @SuppressLint("InflateParams")
             @Override
             public void onClick(final View v) {
-                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/expenses");
+                //  final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/expenses");
                 androidx.appcompat.app.AlertDialog builder = new MaterialAlertDialogBuilder(getContext()).create();
                 builder.setTitle("Add Expense Details");
                 final View view = getLayoutInflater().inflate(R.layout.expense_alert, null);
@@ -154,37 +158,49 @@ public class Expenses extends Fragment {
                         expenseamount = view.findViewById(R.id.expense_amount);
                         name = expensename.getEditableText().toString();
                         amount = expenseamount.getEditableText().toString();
-                        farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
-                        String key = databaseReference.push().getKey();
-                        FirebaseExpenseObjects firebaseExpenseObjects = new FirebaseExpenseObjects(name, amount, farm_name, date);
-                        assert key != null;
-                        databaseReference.child(key).setValue(firebaseExpenseObjects);
-                        databaseReference.addChildEventListener(new ChildEventListener() {
-                            @Override
-                            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                                Toast.makeText(getActivity(), "Expense added successfully", Toast.LENGTH_SHORT).show();
-                            }
+                        if (name.length() == 0) {
+                            expensename.setError("Please enter expense name to proceed");
+                            expensename.requestFocus();
+                        } else if (amount.length() == 0) {
+                            expenseamount.setError("Please enter expense amount to proceed");
+                            expenseamount.requestFocus();
+                        } else {
+                            //farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
+                            String key = databaseReference.push().getKey();
+                            FirebaseExpenseObjects firebaseExpenseObjects = new FirebaseExpenseObjects(name, amount, retrieved_farm_name, date);
+                            assert key != null;
+                            databaseReference.child(key).setValue(firebaseExpenseObjects);
+                            databaseReference.addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                    noexpenses.setVisibility(View.INVISIBLE);
+                                    noexpensestext.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(getActivity(), "Expense added successfully", Toast.LENGTH_SHORT).show();
+                                }
 
-                            @Override
-                            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                @Override
+                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                            }
+                                }
 
-                            @Override
-                            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                                @Override
+                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-                            }
+                                }
 
-                            @Override
-                            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                @Override
+                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                            }
+                                }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        });
+                                }
+                            });
+
+                        }
+
 
 
                     }

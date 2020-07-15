@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/manuals"
-        android:icon="@drawable/ic_library_books_black_24dp"
+        android:icon="@drawable/ic_help_black_24dp"
         android:title="@string/manuals" />
     <item
         android:id="@+id/notices"

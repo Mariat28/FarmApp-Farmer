@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+
+import java.util.Objects;
 
 import ug.global.glofarmedited.Constants;
 import ug.global.glofarmedited.R;
@@ -31,8 +33,15 @@ public class FarmFinancialsMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farm_financials_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Farm Financials");
+
+
         TabLayout tabLayout = findViewById(R.id.farmfinancialstabslayout);
-        ActionBar actionBar;
+
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final ViewPager viewPager = findViewById(R.id.farmfinancialsviewpager);
@@ -119,6 +128,10 @@ public class FarmFinancialsMain extends AppCompatActivity {
             });
             builder.show();
 
+        } else if (menuItem.getItemId() == android.R.id.home) {
+            onBackPressed();
+         /*   startActivity(new Intent(this, Home.class));
+            finish();*/
         }
         return true;
     }

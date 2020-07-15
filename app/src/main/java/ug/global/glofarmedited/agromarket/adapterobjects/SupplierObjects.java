@@ -1,20 +1,23 @@
 package ug.global.glofarmedited.agromarket.adapterobjects;
 
 public class SupplierObjects {
-    private String productname;
+    private String supplyname;
     private String price;
-    private String availablesupply;
+    private String availableamount;
     private Integer photo;
 
-    public SupplierObjects(String productname, String price, String availablesupply, Integer photo) {
-        this.productname = productname;
-        this.price = price;
-        this.availablesupply = availablesupply;
-        this.photo = photo;
+    public SupplierObjects() {
     }
 
-    public String getProductname() {
-        return productname;
+    public SupplierObjects(String supplyname, String price, String availableamount) {
+        this.supplyname = supplyname;
+        this.price = price;
+        this.availableamount = availableamount;
+        //   this.photo = photo;
+    }
+
+    public String getSupplyname() {
+        return supplyname;
     }
 
 
@@ -26,8 +29,8 @@ public class SupplierObjects {
         return price;
     }
 
-    public String getAvailablesupply() {
-        return availablesupply;
+    public String getAvailableamount() {
+        return availableamount;
     }
 
 }

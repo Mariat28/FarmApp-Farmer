@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -65,6 +66,7 @@ public class Orders extends Fragment {
         final TextView noorderstextview = view.findViewById(R.id.noorderstext);
         progressBar = view.findViewById(R.id.orderprogress);
         progressBar.setVisibility(View.VISIBLE);
+        // FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         sharedPreferences = getActivity().getSharedPreferences("sort settings", MODE_PRIVATE);
         String msorting = sharedPreferences.getString("Sort", "Newest");//if no settings is selected,newest will be default
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -86,10 +88,12 @@ public class Orders extends Fragment {
         final OrdersAdapter adapter = new OrdersAdapter(orderObjects, getActivity());
         DatabaseReference orderreference = FirebaseDatabase.getInstance().getReference("/orders");
         final String farm_name = getActivity().getSharedPreferences(Constants.getSharedPrefs(), MODE_PRIVATE).getString("farm_name", null);
+//        String userid= Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
         Query query = orderreference.orderByChild("farmname").equalTo(farm_name);
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Log.i("TAG", "order " + dataSnapshot);
 
                 if (dataSnapshot.exists()) {
                     progressBar.setVisibility(View.INVISIBLE);
