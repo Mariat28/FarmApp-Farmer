@@ -116,6 +116,7 @@
     <string name="enter_question">Enter Question</string>
     <string name="view_full_business_report">View Full Business Report</string>
     <string name="please_enter_your_lastname">Please enter your lastname</string>
+    <string name="chats">Chat</string>
     <string-array name="dairy_units">
         <item>litres</item>
         <item>packets</item>
