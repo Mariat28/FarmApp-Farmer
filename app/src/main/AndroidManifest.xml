@@ -22,6 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".chat.ChatPeopleListActivity"></activity>
+        <activity
+            android:name=".chat.ChatDetailActivity"
+            android:label="@string/title_activity_chat_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -48,17 +53,15 @@
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <data
                     android:host="ug.global"
                     android:scheme="http" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".farmfinancials.FinancialReportActivity"
             android:parentActivityName=".farmfinancials.FarmFinancialsMain" />
@@ -79,6 +82,7 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

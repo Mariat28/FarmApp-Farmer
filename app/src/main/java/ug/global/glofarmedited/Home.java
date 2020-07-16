@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import ug.global.glofarmedited.agromarket.FarmTools;
 import ug.global.glofarmedited.agromarket.ProductsActivityMain;
 import ug.global.glofarmedited.agromarket.SuppliesActivityMain;
+import ug.global.glofarmedited.chat.ChatPeopleListActivity;
 import ug.global.glofarmedited.farmfinancials.FarmFinancialsMain;
 import ug.global.glofarmedited.supporttools.SupportToolsMain;
 
@@ -39,7 +40,13 @@ public class Home extends AppCompatActivity {
         agromarketcard = findViewById(R.id.agromarket);
         supporttoolscard = findViewById(R.id.supporttoolscard);
         market_card_panel = findViewById(R.id.market_card_panel);
-        //inputtrackingcard = findViewById(R.id.inputtrackingcard);
+        inputtrackingcard = findViewById(R.id.inputtrackingcard);
+        inputtrackingcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this, ChatPeopleListActivity.class));
+            }
+        });
         supplies = findViewById(R.id.supplies);
         farm_tools = findViewById(R.id.farm_tools);
         products = findViewById(R.id.products);
