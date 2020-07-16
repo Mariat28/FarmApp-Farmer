@@ -1,14 +1,15 @@
 package ug.global.glofarmedited.chat;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
 
 import ug.global.glofarmedited.R;
 
@@ -21,15 +22,17 @@ public class ChatDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        toolBarLayout.setTitle(getTitle());
+        toolBarLayout.setTitle("Chat Detail");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        RecyclerView recyclerView=findViewById(R.id.recyclerView);
+        ArrayList<Message> messages=new ArrayList<>();
+        MessageAdapter messageAdapter=new MessageAdapter(this,messages);
+        recyclerView.setAdapter(messageAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        for (int i = 0; i < 12; i++) {
+            messages.add(new Message("12:23","sdkjnkshdbfkhsdfsdf sfsefrwerwefuhew7f 8ergfo8erf","Jon","me"));
+            messageAdapter.notifyDataSetChanged();
+        }
     }
 }
